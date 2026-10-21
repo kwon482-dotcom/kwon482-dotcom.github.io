@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GyuC Studio - Mobile Apps</title>
-  <meta name="description" content="GyuC 모바일 라이프 앱 스튜디오 - On가계부, On타이머, 작심삼일본어, 했니?">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%3E<text y=%2226%22 font-size=%2226%22>✨</text></svg>">
+  <meta name="description" content="GyuC Mobile Studio - OnWallet, OnTimer, OnVocab, OnRoutine, OnEnglish">
+  <link rel="icon" type="image/png" href="icons/on-wallet.png">
   <style>
     :root {
       --bg: #0f172a;
@@ -15,14 +15,14 @@
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.15);
+      --accent-glow: rgba(56, 189, 248, 0.18);
       --badge-bg: #0369a1;
       --badge-text: #e0f2fe;
       --tag-bg: #334155;
       --tag-text: #cbd5e1;
       --badge-soon-bg: #334155;
       --badge-soon-text: #f59e0b;
-      --badge-soon-border: rgba(245, 158, 11, 0.3);
+      --badge-soon-border: rgba(245, 158, 11, 0.35);
     }
 
     * {
@@ -32,11 +32,11 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", "Noto Sans JP", "Noto Sans TC", "Noto Sans SC", sans-serif;
       background-color: var(--bg);
       color: var(--text-main);
       line-height: 1.6;
-      padding: 48px 20px;
+      padding: 40px 20px 48px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -44,14 +44,52 @@
     }
 
     .container {
-      max-width: 740px;
+      max-width: 760px;
       width: 100%;
       margin: 0 auto;
     }
 
+    /* 상단 언어 선택 바 */
+    .lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .lang-btn:hover {
+      color: var(--text-main);
+      border-color: #475569;
+      background: #243248;
+    }
+
+    .lang-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
     header {
       text-align: center;
-      margin-bottom: 44px;
+      margin-bottom: 40px;
     }
 
     .logo-badge {
@@ -80,7 +118,7 @@
     header p {
       color: var(--text-muted);
       font-size: 1.05rem;
-      max-width: 540px;
+      max-width: 580px;
       margin: 0 auto;
     }
 
@@ -95,7 +133,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
+      gap: 20px;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 20px;
@@ -121,7 +159,7 @@
 
     /* 출시 준비 중 앱 카드 */
     .app-card.coming-soon {
-      opacity: 0.88;
+      opacity: 0.9;
       cursor: default;
     }
 
@@ -132,27 +170,36 @@
     .app-card-left {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 20px;
       flex: 1;
       min-width: 0;
     }
 
+    /* 앱 아이콘 래퍼 */
     .app-icon {
-      font-size: 2.2rem;
-      width: 60px;
-      height: 60px;
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      border-radius: 16px;
       flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease;
     }
 
-    .app-card.coming-soon .app-icon {
-      background: rgba(148, 163, 184, 0.1);
-      border-color: rgba(148, 163, 184, 0.2);
+    .app-card.active:hover .app-icon {
+      transform: scale(1.05);
+    }
+
+    .app-icon-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .app-info {
@@ -164,7 +211,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
       flex-wrap: wrap;
     }
 
@@ -178,30 +225,31 @@
     .badge-sub {
       font-size: 0.72rem;
       font-weight: 600;
-      padding: 2px 7px;
+      padding: 3px 8px;
       background: var(--badge-bg);
       color: var(--badge-text);
       border-radius: 6px;
+      letter-spacing: 0.3px;
     }
 
     .badge-soon {
       font-size: 0.72rem;
       font-weight: 600;
-      padding: 2px 8px;
+      padding: 3px 9px;
       background: rgba(245, 158, 11, 0.15);
       border: 1px solid var(--badge-soon-border);
       color: var(--badge-soon-text);
       border-radius: 6px;
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
     }
 
     .app-desc {
       color: var(--text-muted);
       font-size: 0.94rem;
-      line-height: 1.45;
-      margin-bottom: 8px;
+      line-height: 1.5;
+      margin-bottom: 10px;
     }
 
     .app-tags {
@@ -228,7 +276,7 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      padding: 9px 15px;
+      padding: 10px 16px;
       background: rgba(56, 189, 248, 0.12);
       color: var(--accent);
       border: 1px solid rgba(56, 189, 248, 0.35);
@@ -257,7 +305,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 9px 15px;
+      padding: 10px 16px;
       background: rgba(148, 163, 184, 0.08);
       color: #94a3b8;
       border: 1px solid #334155;
@@ -285,9 +333,18 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 620px) {
+    @media (max-width: 640px) {
       body {
-        padding: 32px 16px;
+        padding: 24px 16px 36px;
+      }
+
+      .lang-bar {
+        margin-bottom: 20px;
+      }
+
+      .lang-btn {
+        padding: 5px 10px;
+        font-size: 0.78rem;
       }
 
       header h1 {
@@ -298,7 +355,7 @@
         flex-direction: column;
         align-items: flex-start;
         padding: 18px;
-        gap: 14px;
+        gap: 16px;
       }
 
       .app-action {
@@ -314,24 +371,35 @@
 </head>
 <body>
   <div class="container">
+    <!-- 다국어 선택 바 -->
+    <nav class="lang-bar" aria-label="Language selection">
+      <button class="lang-btn" data-lang="ko" onclick="setLanguage('ko')">🇰🇷 한국어</button>
+      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇺🇸 English</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLanguage('ja')">🇯🇵 日本語</button>
+      <button class="lang-btn" data-lang="zh" onclick="setLanguage('zh')">🇨🇳/🇹🇼 中文</button>
+      <button class="lang-btn" data-lang="es" onclick="setLanguage('es')">🇪🇸 Español</button>
+    </nav>
+
     <header>
-      <div class="logo-badge">GyuC Mobile Studio</div>
-      <h1>GyuC Apps</h1>
-      <p>일상을 더 편리하고 단단하게 만드는 실용적인 모바일 라이프 앱</p>
+      <div class="logo-badge" id="txt-logo-badge">GyuC Mobile Studio</div>
+      <h1 id="txt-header-title">GyuC Apps</h1>
+      <p id="txt-header-desc">일상을 더 편리하고 단단하게 만드는 실용적인 모바일 라이프 앱</p>
     </header>
 
     <main class="card-grid">
-      <!-- 1. On가계부 (출시 / 심사 진행 중) -->
+      <!-- 1. On가계부 (OnWallet) -->
       <a class="app-card active" href="https://play.google.com/store/apps/details?id=com.kwon.onwallet" target="_blank" rel="noopener noreferrer">
         <div class="app-card-left">
-          <div class="app-icon">💰</div>
+          <div class="app-icon">
+            <img src="icons/on-wallet.png" alt="OnWallet App Icon" class="app-icon-img" loading="eager">
+          </div>
           <div class="app-info">
             <div class="app-title-row">
-              <span class="app-title">On가계부 (OnWallet)</span>
-              <span class="badge-sub">한국어 · EN · 日本語</span>
+              <span class="app-title" id="app1-title">On가계부 (OnWallet)</span>
+              <span class="badge-sub" id="app1-badge">한국어 · EN · 日本語 · 中文 · ES</span>
             </div>
-            <p class="app-desc">혼자 쓰고 둘이 같이 쓰는 실시간 공유 가계부 & 고정지출·구독 관리</p>
-            <div class="app-tags">
+            <p class="app-desc" id="app1-desc">혼자 쓰고 둘이 같이 쓰는 실시간 공유 가계부 & 고정지출·구독 관리</p>
+            <div class="app-tags" id="app1-tags">
               <span class="tag">#공유가계부</span>
               <span class="tag">#고정비D-Day</span>
               <span class="tag">#소비분석</span>
@@ -342,22 +410,24 @@
         <div class="app-action">
           <div class="btn-play">
             <svg viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
-            Google Play ↗
+            <span class="btn-text">Google Play ↗</span>
           </div>
         </div>
       </a>
 
-      <!-- 2. On타이머 (출시 완료) -->
+      <!-- 2. On타이머 (OnTimer) -->
       <a class="app-card active" href="https://play.google.com/store/apps/details?id=com.kwon.ontimer" target="_blank" rel="noopener noreferrer">
         <div class="app-card-left">
-          <div class="app-icon">⏱️</div>
+          <div class="app-icon">
+            <img src="icons/on-timer.png" alt="OnTimer App Icon" class="app-icon-img" loading="eager">
+          </div>
           <div class="app-info">
             <div class="app-title-row">
-              <span class="app-title">On타이머 (OnTimer)</span>
-              <span class="badge-sub">한국어 · EN · 日本語</span>
+              <span class="app-title" id="app2-title">On타이머 (OnTimer)</span>
+              <span class="badge-sub" id="app2-badge">한국어 · EN · 日本語</span>
             </div>
-            <p class="app-desc">운동 인터벌 & 집중 업무를 위한 미니멀 맞춤형 타이머</p>
-            <div class="app-tags">
+            <p class="app-desc" id="app2-desc">운동 인터벌 & 집중 업무를 위한 미니멀 맞춤형 타이머</p>
+            <div class="app-tags" id="app2-tags">
               <span class="tag">#인터벌타이머</span>
               <span class="tag">#타바타</span>
               <span class="tag">#몰입/집중</span>
@@ -367,22 +437,24 @@
         <div class="app-action">
           <div class="btn-play">
             <svg viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
-            Google Play ↗
+            <span class="btn-text">Google Play ↗</span>
           </div>
         </div>
       </a>
 
-      <!-- 3. 작심삼일본어 (출시 준비 중) -->
+      <!-- 3. 작심삼일본어 (OnVocab) -->
       <div class="app-card coming-soon">
         <div class="app-card-left">
-          <div class="app-icon">📚</div>
+          <div class="app-icon">
+            <img src="icons/on-vocab.png" alt="OnVocab App Icon" class="app-icon-img" loading="lazy">
+          </div>
           <div class="app-info">
             <div class="app-title-row">
-              <span class="app-title">작심삼일본어 (OnVocab)</span>
-              <span class="badge-soon">⏳ 출시 준비 중</span>
+              <span class="app-title" id="app3-title">작심삼일본어 (OnVocab)</span>
+              <span class="badge-soon" id="app3-badge">⏳ <span class="badge-soon-text">출시 준비 중</span></span>
             </div>
-            <p class="app-desc">JLPT N5~N1 필수 단어·한자·문법 암기 스마트 플래시카드</p>
-            <div class="app-tags">
+            <p class="app-desc" id="app3-desc">JLPT N5~N1 필수 단어·한자·문법 암기 스마트 플래시카드</p>
+            <div class="app-tags" id="app3-tags">
               <span class="tag">#JLPT</span>
               <span class="tag">#일본어단어</span>
               <span class="tag">#스마트반복암기</span>
@@ -390,23 +462,25 @@
           </div>
         </div>
         <div class="app-action">
-          <div class="btn-soon">
+          <div class="btn-soon" id="app3-btn">
             ⏳ 출시 준비 중
           </div>
         </div>
       </div>
 
-      <!-- 4. 했니? (출시 준비 중) -->
+      <!-- 4. 했니? (OnRoutine) -->
       <div class="app-card coming-soon">
         <div class="app-card-left">
-          <div class="app-icon">🔄</div>
+          <div class="app-icon">
+            <img src="icons/on-routine.png" alt="OnRoutine App Icon" class="app-icon-img" loading="lazy">
+          </div>
           <div class="app-info">
             <div class="app-title-row">
-              <span class="app-title">했니? (OnRoutine)</span>
-              <span class="badge-soon">⏳ 출시 준비 중</span>
+              <span class="app-title" id="app4-title">했니? (OnRoutine)</span>
+              <span class="badge-soon" id="app4-badge">⏳ <span class="badge-soon-text">출시 준비 중</span></span>
             </div>
-            <p class="app-desc">작심삼일 타파! 매일의 루틴과 습관을 점검하는 스마트 체크 트래커</p>
-            <div class="app-tags">
+            <p class="app-desc" id="app4-desc">작심삼일 타파! 매일의 루틴과 습관을 점검하는 스마트 체크 트래커</p>
+            <div class="app-tags" id="app4-tags">
               <span class="tag">#루틴체크</span>
               <span class="tag">#습관트래커</span>
               <span class="tag">#동기부여</span>
@@ -414,23 +488,25 @@
           </div>
         </div>
         <div class="app-action">
-          <div class="btn-soon">
+          <div class="btn-soon" id="app4-btn">
             ⏳ 출시 준비 중
           </div>
         </div>
       </div>
 
-      <!-- 5. 작심삼일 영어 (출시 준비 중) -->
+      <!-- 5. 작심삼일 영어 (OnEnglish) -->
       <div class="app-card coming-soon">
         <div class="app-card-left">
-          <div class="app-icon">📖</div>
+          <div class="app-icon">
+            <img src="icons/on-english.png" alt="OnEnglish App Icon" class="app-icon-img" loading="lazy">
+          </div>
           <div class="app-info">
             <div class="app-title-row">
-              <span class="app-title">작심삼일 영어 (OnEnglish)</span>
-              <span class="badge-soon">⏳ 출시 준비 중</span>
+              <span class="app-title" id="app5-title">작심삼일 영어 (OnEnglish)</span>
+              <span class="badge-soon" id="app5-badge">⏳ <span class="badge-soon-text">출시 준비 중</span></span>
             </div>
-            <p class="app-desc">3일 단위 스마트 반복! 기초회화·토익·비즈니스 단어 & AI 맞춤 독해</p>
-            <div class="app-tags">
+            <p class="app-desc" id="app5-desc">3일 단위 스마트 반복! 기초회화·토익·비즈니스 단어 & AI 맞춤 독해</p>
+            <div class="app-tags" id="app5-tags">
               <span class="tag">#영어회화</span>
               <span class="tag">#토익/비즈니스</span>
               <span class="tag">#스마트플래시카드</span>
@@ -439,7 +515,7 @@
           </div>
         </div>
         <div class="app-action">
-          <div class="btn-soon">
+          <div class="btn-soon" id="app5-btn">
             ⏳ 출시 준비 중
           </div>
         </div>
@@ -447,9 +523,279 @@
     </main>
 
     <footer>
-      <p>문의 및 지원: <a href="mailto:apps@gyugyu.net">apps@gyugyu.net</a></p>
+      <p><span id="txt-footer-contact">문의 및 지원:</span> <a href="mailto:apps@gyugyu.net">apps@gyugyu.net</a></p>
       <p style="margin-top: 8px; font-size: 0.82rem; opacity: 0.7;">&copy; 2026 GyuC Studio. All rights reserved.</p>
     </footer>
   </div>
+
+  <script>
+    const translations = {
+      ko: {
+        logoBadge: "GyuC Mobile Studio",
+        headerTitle: "GyuC Apps",
+        headerDesc: "일상을 더 편리하고 단단하게 만드는 실용적인 모바일 라이프 앱",
+        soon: "출시 준비 중",
+        soonBtn: "⏳ 출시 준비 중",
+        contact: "문의 및 지원:",
+        app1: {
+          title: "On가계부 (OnWallet)",
+          badge: "한국어 · EN · 日本語 · 中文 · ES",
+          desc: "혼자 쓰고 둘이 같이 쓰는 실시간 공유 가계부 & 고정지출·구독 관리",
+          tags: ["#공유가계부", "#고정비D-Day", "#소비분석", "#다국어/다중통화"]
+        },
+        app2: {
+          title: "On타이머 (OnTimer)",
+          badge: "한국어 · EN · 日本語",
+          desc: "운동 인터벌 & 집중 업무를 위한 미니멀 맞춤형 타이머",
+          tags: ["#인터벌타이머", "#타바타", "#몰입/집중"]
+        },
+        app3: {
+          title: "작심삼일본어 (OnVocab)",
+          desc: "JLPT N5~N1 필수 단어·한자·문법 암기 스마트 플래시카드",
+          tags: ["#JLPT", "#일본어단어", "#스마트반복암기"]
+        },
+        app4: {
+          title: "했니? (OnRoutine)",
+          desc: "작심삼일 타파! 매일의 루틴과 습관을 점검하는 스마트 체크 트래커",
+          tags: ["#루틴체크", "#습관트래커", "#동기부여"]
+        },
+        app5: {
+          title: "작심삼일 영어 (OnEnglish)",
+          desc: "3일 단위 스마트 반복! 기초회화·토익·비즈니스 단어 & AI 맞춤 독해",
+          tags: ["#영어회화", "#토익/비즈니스", "#스마트플래시카드", "#AI독해"]
+        }
+      },
+      en: {
+        logoBadge: "GyuC Mobile Studio",
+        headerTitle: "GyuC Apps",
+        headerDesc: "Practical mobile life apps designed to make your daily routine smarter and simpler.",
+        soon: "Coming Soon",
+        soonBtn: "⏳ Coming Soon",
+        contact: "Contact & Support:",
+        app1: {
+          title: "OnWallet",
+          badge: "KO · EN · JA · ZH · ES",
+          desc: "Simple personal budgeting & real-time shared expense tracker for couples, families, and roommates.",
+          tags: ["#SharedBudget", "#RecurringBills", "#SpendingAnalytics", "#MultiCurrency"]
+        },
+        app2: {
+          title: "OnTimer",
+          badge: "KO · EN · JA",
+          desc: "Minimalist interval & focus timer for workouts, Tabata, and deep work sessions.",
+          tags: ["#IntervalTimer", "#Tabata", "#FocusTimer"]
+        },
+        app3: {
+          title: "OnVocab - Japanese",
+          desc: "Smart spaced-repetition flashcards for JLPT N5~N1 vocabulary, kanji, and grammar.",
+          tags: ["#JLPT", "#JapaneseVocab", "#SmartRepetition"]
+        },
+        app4: {
+          title: "Did You? (OnRoutine)",
+          desc: "Build consistent habits! Smart daily routine tracker & goal checklist.",
+          tags: ["#RoutineCheck", "#HabitTracker", "#Motivation"]
+        },
+        app5: {
+          title: "OnEnglish",
+          desc: "3-day cycle smart learning! Essential conversation, TOEIC, business vocab & AI reading.",
+          tags: ["#EnglishConversation", "#TOEIC", "#Flashcards", "#AIReading"]
+        }
+      },
+      ja: {
+        logoBadge: "GyuC Mobile Studio",
+        headerTitle: "GyuC Apps",
+        headerDesc: "毎日をより便利で豊かにする実用的なモバイルライフアプリ",
+        soon: "近日公開",
+        soonBtn: "⏳ 近日公開",
+        contact: "お問い合わせ・サポート:",
+        app1: {
+          title: "みんなの家計簿 (OnWallet)",
+          badge: "日本語 · EN · 韓 · 中 · 西",
+          desc: "個人でも二人でも！リアルタイム共有対応のシンプル家計簿＆固定費・サブスク管理",
+          tags: ["#共有家計簿", "#固定費D-Day", "#支出分析", "#多通貨対応"]
+        },
+        app2: {
+          title: "Onタイマー (OnTimer)",
+          badge: "日本語 · EN · 韓国語",
+          desc: "ワークアウト、タバタ、集中作業のためのミニマルインターバルタイマー",
+          tags: ["#インターバル", "#タバタ", "#集中タイマー"]
+        },
+        app3: {
+          title: "三日坊主脱出！日本語 (OnVocab)",
+          desc: "JLPT N5〜N1対応の重要単語・漢字・文法をスマートに暗記する単語帳",
+          tags: ["#JLPT", "#日本語単語", "#スマート反復"]
+        },
+        app4: {
+          title: "やった？ (OnRoutine)",
+          desc: "三日坊主を撃退！毎日の習慣とルーティンをチェックするスマート習慣トラッカー",
+          tags: ["#ルーティンチェック", "#習慣トラッカー", "#モチベーション"]
+        },
+        app5: {
+          title: "三日坊主脱出！英語 (OnEnglish)",
+          desc: "3日サイクルでスマート反復！英会話・TOEIC・ビジネス単語＆AI読解",
+          tags: ["#英会話", "#TOEIC/ビジネス", "#単語カード", "#AI読解"]
+        }
+      },
+      zh: {
+        logoBadge: "GyuC Mobile Studio",
+        headerTitle: "GyuC Apps",
+        headerDesc: "讓生活更輕鬆、更高效的實用行動生活應用程式",
+        soon: "即將推出",
+        soonBtn: "⏳ 即將推出",
+        contact: "聯絡與技術支援:",
+        app1: {
+          title: "On記帳 (OnWallet)",
+          badge: "中文 · EN · 日 · 韓 · 西",
+          desc: "個人記帳與雙人即時共享！無訂閱費用的簡約記帳與固定支出管理",
+          tags: ["#共享記帳", "#固定支出管理", "#消費分析", "#多幣別支援"]
+        },
+        app2: {
+          title: "On計時器 (OnTimer)",
+          badge: "中文 · EN · 日 · 韓",
+          desc: "專為間歇運動、TABATA與深度專注打造的極簡自訂計時器",
+          tags: ["#間歇計時器", "#Tabata", "#專注計時"]
+        },
+        app3: {
+          title: "作心三日日語 (OnVocab)",
+          desc: "JLPT N5~N1 必背單字、漢字與文法高效智能記憶卡",
+          tags: ["#JLPT", "#日語單字", "#高效複習"]
+        },
+        app4: {
+          title: "做了沒？ (OnRoutine)",
+          desc: "告別三分鐘熱度！檢視每日習慣與常規任務的智慧清單追蹤器",
+          tags: ["#常規檢查", "#習慣追蹤", "#目標堅持"]
+        },
+        app5: {
+          title: "作心三日英語 (OnEnglish)",
+          desc: "3日週期循環複習！基礎會話、TOEIC、商務單字與 AI 客製化閱讀",
+          tags: ["#英語會話", "#TOEIC", "#智慧單字卡", "#AI閱讀"]
+        }
+      },
+      es: {
+        logoBadge: "GyuC Mobile Studio",
+        headerTitle: "GyuC Apps",
+        headerDesc: "Aplicaciones móviles prácticas diseñadas para hacer tu día a día más fácil y productivo.",
+        soon: "Próximamente",
+        soonBtn: "⏳ Próximamente",
+        contact: "Contacto y Soporte:",
+        app1: {
+          title: "OnWallet",
+          badge: "ES · EN · KO · JA · ZH",
+          desc: "Control de gastos personales y compartidos en tiempo real. ¡Sin suscripciones mensuales!",
+          tags: ["#FinanzasCompartidas", "#GastosFijos", "#AnalíticaDeGastos", "#MultiDivisa"]
+        },
+        app2: {
+          title: "OnTimer",
+          badge: "ES · EN · KO · JA",
+          desc: "Temporizador minimalista de intervalos y enfoque para entrenamientos, Tabata y productividad.",
+          tags: ["#TemporizadorIntervalos", "#Tabata", "#EnfoqueTotal"]
+        },
+        app3: {
+          title: "OnVocab - Japonés",
+          desc: "Tarjetas inteligentes de repetición espaciada para vocabulario, kanji y gramática JLPT N5~N1.",
+          tags: ["#JLPT", "#VocabularioJaponés", "#RepeticiónEspaciada"]
+        },
+        app4: {
+          title: "¿Lo hiciste? (OnRoutine)",
+          desc: "¡Construye hábitos duraderos! Rastreador inteligente de rutinas diarias y metas personales.",
+          tags: ["#RutinasDiarias", "#Hábitos", "#Motivación"]
+        },
+        app5: {
+          title: "OnEnglish",
+          desc: "¡Ciclos de aprendizaje de 3 días! Conversación, TOEIC, negocios y lectura adaptada con IA.",
+          tags: ["#ConversaciónInglés", "#TOEIC", "#TarjetasDeEstudio", "#LecturaConIA"]
+        }
+      }
+    };
+
+    function setLanguage(lang) {
+      if (!translations[lang]) lang = 'ko';
+      const t = translations[lang];
+
+      // HTML lang 속성 업데이트
+      document.documentElement.lang = lang;
+
+      // 버튼 활성화 상태 표시
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+
+      // 헤더 & 푸터 텍스트 변경
+      document.getElementById('txt-logo-badge').textContent = t.logoBadge;
+      document.getElementById('txt-header-title').textContent = t.headerTitle;
+      document.getElementById('txt-header-desc').textContent = t.headerDesc;
+      document.getElementById('txt-footer-contact').textContent = t.contact;
+
+      // App 1 (OnWallet)
+      document.getElementById('app1-title').textContent = t.app1.title;
+      document.getElementById('app1-badge').textContent = t.app1.badge;
+      document.getElementById('app1-desc').textContent = t.app1.desc;
+      renderTags('app1-tags', t.app1.tags);
+
+      // App 2 (OnTimer)
+      document.getElementById('app2-title').textContent = t.app2.title;
+      document.getElementById('app2-badge').textContent = t.app2.badge;
+      document.getElementById('app2-desc').textContent = t.app2.desc;
+      renderTags('app2-tags', t.app2.tags);
+
+      // App 3 (OnVocab)
+      document.getElementById('app3-title').textContent = t.app3.title;
+      document.getElementById('app3-desc').textContent = t.app3.desc;
+      renderTags('app3-tags', t.app3.tags);
+      document.getElementById('app3-badge').innerHTML = `⏳ <span class="badge-soon-text">${t.soon}</span>`;
+      document.getElementById('app3-btn').textContent = t.soonBtn;
+
+      // App 4 (OnRoutine)
+      document.getElementById('app4-title').textContent = t.app4.title;
+      document.getElementById('app4-desc').textContent = t.app4.desc;
+      renderTags('app4-tags', t.app4.tags);
+      document.getElementById('app4-badge').innerHTML = `⏳ <span class="badge-soon-text">${t.soon}</span>`;
+      document.getElementById('app4-btn').textContent = t.soonBtn;
+
+      // App 5 (OnEnglish)
+      document.getElementById('app5-title').textContent = t.app5.title;
+      document.getElementById('app5-desc').textContent = t.app5.desc;
+      renderTags('app5-tags', t.app5.tags);
+      document.getElementById('app5-badge').innerHTML = `⏳ <span class="badge-soon-text">${t.soon}</span>`;
+      document.getElementById('app5-btn').textContent = t.soonBtn;
+
+      // 설정 기억
+      try {
+        localStorage.setItem('gyuc_lang', lang);
+      } catch (e) {}
+    }
+
+    function renderTags(elementId, tags) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      el.innerHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+    }
+
+    // 초기 언어 감지 및 설정
+    (function initLanguage() {
+      let saved = null;
+      try {
+        saved = localStorage.getItem('gyuc_lang');
+      } catch (e) {}
+
+      if (saved && translations[saved]) {
+        setLanguage(saved);
+        return;
+      }
+
+      // 브라우저 언어 감지
+      const browserLang = (navigator.language || navigator.userLanguage || 'ko').toLowerCase();
+      if (browserLang.startsWith('ja')) {
+        setLanguage('ja');
+      } else if (browserLang.startsWith('zh')) {
+        setLanguage('zh');
+      } else if (browserLang.startsWith('es')) {
+        setLanguage('es');
+      } else if (browserLang.startsWith('en')) {
+        setLanguage('en');
+      } else {
+        setLanguage('ko');
+      }
+    })();
+  </script>
 </body>
 </html>
