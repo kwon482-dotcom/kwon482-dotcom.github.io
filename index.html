@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GyuC Studio - Mobile Apps</title>
-  <meta name="description" content="GyuC Mobile Studio - OnWallet, OnTimer, OnVocab, OnRoutine, OnEnglish">
+  <meta name="description" content="GyuC Mobile Studio - OnWallet, OnTimer, OnVocab, OnRoutine, OnEnglish, OnKorean">
   <link rel="icon" type="image/png" href="icons/on-wallet.png">
   <style>
     :root {
@@ -552,6 +552,33 @@
           </div>
         </div>
       </div>
+    
+      <!-- 6. 작심삼일 한국어 (OnKorean) -->
+      <div class="app-card coming-soon">
+        <div class="app-card-left">
+          <div class="app-icon">
+            <img src="icons/on-korean.png" alt="OnKorean App Icon" class="app-icon-img" loading="lazy">
+          </div>
+          <div class="app-info">
+            <div class="app-title-row">
+              <span class="app-title" id="app6-title">작심삼일 한국어 (OnKorean)</span>
+              <span class="badge-soon" id="app6-badge">⏳ <span class="badge-soon-text">출시 준비 중</span></span>
+            </div>
+            <p class="app-desc" id="app6-desc">3일 단위 스마트 플래시카드! 한글 기초부터 TOPIK·K-드라마 실전회화 & 원어민 발음</p>
+            <div class="app-tags" id="app6-tags">
+              <span class="tag">#한국어공부</span>
+              <span class="tag">#TOPIK</span>
+              <span class="tag">#스마트단어장</span>
+              <span class="tag">#K드라마회화</span>
+            </div>
+          </div>
+        </div>
+        <div class="app-action">
+          <div class="btn-soon" id="app6-btn">
+            ⏳ 출시 준비 중
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer>
@@ -596,6 +623,11 @@
           title: "작심삼일 영어 (OnEnglish)",
           desc: "3일 단위 스마트 반복! 기초회화·토익·비즈니스 단어 & AI 맞춤 독해",
           tags: ["#영어회화", "#토익/비즈니스", "#스마트플래시카드", "#AI독해"]
+        },
+        app6: {
+          title: "작심삼일 한국어 (OnKorean)",
+          desc: "3일 단위 스마트 플래시카드! 한글 기초부터 TOPIK·K-드라마 실전회화 & 원어민 발음",
+          tags: ["#한국어공부", "#TOPIK", "#스마트단어장", "#K드라마회화"]
         }
       },
       en: {
@@ -632,6 +664,11 @@
           title: "OnEnglish",
           desc: "3-day cycle smart learning! Essential conversation, TOEIC, business vocab & AI reading.",
           tags: ["#EnglishConversation", "#TOEIC", "#Flashcards", "#AIReading"]
+        },
+        app6: {
+          title: "OnKorean - Learn Korean",
+          desc: "Smart 3-day spaced repetition! Master Hangul basics, TOPIK vocabulary & K-drama phrases.",
+          tags: ["#LearnKorean", "#Hangul", "#TOPIK", "#KDramaPhrases"]
         }
       },
       ja: {
@@ -668,6 +705,11 @@
           title: "三日坊主脱出！英語 (OnEnglish)",
           desc: "3日サイクルでスマート反復！英会話・TOEIC・ビジネス単語＆AI読解",
           tags: ["#英会話", "#TOEIC/ビジネス", "#単語カード", "#AI読解"]
+        },
+        app6: {
+          title: "三日坊主韓国語 (OnKorean)",
+          desc: "3日サイクルで楽しく覚える！ハングル基礎・TOPIK必須単語・K-POP日常会話＆音声",
+          tags: ["#韓国語学習", "#ハングル", "#TOPIK", "#Kドラマ会話"]
         }
       },
       zh: {
@@ -704,6 +746,11 @@
           title: "作心三日英語 (OnEnglish)",
           desc: "3日週期循環複習！基礎會話、TOEIC、商務單字與 AI 客製化閱讀",
           tags: ["#英語會話", "#TOEIC", "#智慧單字卡", "#AI閱讀"]
+        },
+        app6: {
+          title: "作心三日韓語 (OnKorean)",
+          desc: "3日週期高效記憶！從韓語字母到TOPIK必備單字、韓劇常用生活會話與發音",
+          tags: ["#韓語學習", "#TOPIK", "#韓語單字", "#韓劇會話"]
         }
       },
       es: {
@@ -740,6 +787,11 @@
           title: "OnEnglish",
           desc: "¡Ciclos de aprendizaje de 3 días! Conversación, TOEIC, negocios y lectura adaptada con IA.",
           tags: ["#ConversaciónInglés", "#TOEIC", "#TarjetasDeEstudio", "#LecturaConIA"]
+        },
+        app6: {
+          title: "OnKorean - Aprende Coreano",
+          desc: "¡Aprende coreano en ciclos de 3 días! Desde Hangul y TOPIK hasta frases de K-Dramas con audio.",
+          tags: ["#AprenderCoreano", "#Hangul", "#TOPIK", "#CoreanoReal"]
         }
       }
     };
@@ -795,6 +847,14 @@
       renderTags('app5-tags', t.app5.tags);
       document.getElementById('app5-badge').innerHTML = `⏳ <span class="badge-soon-text">${t.soon}</span>`;
       document.getElementById('app5-btn').textContent = t.soonBtn;
+
+      // App 6 (OnKorean)
+      document.getElementById('app6-title').textContent = t.app6.title;
+      document.getElementById('app6-desc').textContent = t.app6.desc;
+      renderTags('app6-tags', t.app6.tags);
+      document.getElementById('app6-badge').innerHTML = `⏳ <span class="badge-soon-text">${t.soon}</span>`;
+      document.getElementById('app6-btn').textContent = t.soonBtn;
+
 
       // 설정 기억
       try {
