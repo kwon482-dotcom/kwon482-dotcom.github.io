@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>보너스 단어장 배포 센터 - GyuC Studio</title>
+  <meta name="description" content="작심삼일본어(OnVocab) 공식 보너스 단어장 무료 다운로드 및 원클릭 복사">
+  <link rel="icon" type="image/png" href="icons/on-wallet.png">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --card-hover-border: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.18);
+      --success: #10b981;
+      --badge-bg: #0369a1;
+      --badge-text: #e0f2fe;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", "Noto Sans JP", sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px 16px 64px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      color: var(--text-main);
+      border-color: var(--accent);
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .header-icon {
+      font-size: 44px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .title {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      word-break: keep-all;
+    }
+
+    /* Guide Box */
+    .guide-box {
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid #3b82f6;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.12);
+    }
+
+    .guide-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #60a5fa;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .guide-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13.5px;
+      color: #cbd5e1;
+    }
+
+    .guide-steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .step-num {
+      background: #1e3a8a;
+      color: #93c5fd;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 2px 7px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Card List */
+    .deck-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .deck-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 20px;
+      transition: all 0.2s;
+    }
+
+    .deck-card:hover {
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .deck-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .deck-title-area {
+      flex: 1;
+    }
+
+    .deck-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .tag-level {
+      background: #0369a1;
+      color: #e0f2fe;
+    }
+
+    .tag-kanji {
+      background: #7c2d12;
+      color: #ffedd5;
+    }
+
+    .tag-grammar {
+      background: #4c1d95;
+      color: #ede9fe;
+    }
+
+    .word-count {
+      font-size: 12px;
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    .deck-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .deck-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+
+    /* Actions */
+    .deck-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .copy-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #0284c7;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .copy-btn:hover {
+      background: #0369a1;
+    }
+
+    .copy-btn:active {
+      transform: scale(0.98);
+    }
+
+    .copy-btn.copied {
+      background: var(--success) !important;
+    }
+
+    .preview-toggle-btn {
+      background: #334155;
+      color: #cbd5e1;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 12px 14px;
+      border: 1px solid #475569;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .preview-toggle-btn:hover {
+      background: #475569;
+      color: #fff;
+    }
+
+    /* Preview box */
+    .preview-box {
+      display: none;
+      margin-top: 14px;
+      background: #090d16;
+      border: 1px dashed #334155;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 12px;
+      color: #94a3b8;
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .preview-box.open {
+      display: block;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #10b981;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 48px;
+      text-align: center;
+      font-size: 12.5px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top Nav -->
+    <div class="top-nav">
+      <a href="index.html" class="back-btn">
+        <span>←</span> GyuC Studio 홈
+      </a>
+      <span style="font-size: 12px; color: var(--text-muted);">작심삼일본어(OnVocab)</span>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+      <span class="header-icon">🎁</span>
+      <h1 class="title">공식 보너스 단어팩 센터</h1>
+      <p class="subtitle">터치 한 번으로 복사하여 앱에 즉시 등록할 수 있는 추천 단어장 모음</p>
+    </div>
+
+    <!-- Quick Guide Box -->
+    <div class="guide-box">
+      <div class="guide-title">
+        <span>💡</span>
+        <span>앱으로 가져오는 방법 (1초 컷!)</span>
+      </div>
+      <ol class="guide-steps">
+        <li>
+          <span class="step-num">1단계</span>
+          <span>원하는 보너스팩 카드의 <strong>[📋 전체 단어 복사하기]</strong> 버튼을 터치합니다.</span>
+        </li>
+        <li>
+          <span class="step-num">2단계</span>
+          <span><strong>작심삼일본어</strong> 앱 실행 ➔ <strong>설정</strong> ➔ <strong>[외부 단어장 일괄 가져오기]</strong> 터치!</span>
+        </li>
+        <li>
+          <span class="step-num">3단계</span>
+          <span>카테고리명(예: JLPT N3)을 입력하고 <strong>[붙여넣기]</strong>를 누르면 즉시 등록 완료! 🎉</span>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Deck Cards -->
+    <div class="deck-list">
+
+      <!-- 1. JLPT N5 & N4 -->
+      <div class="deck-card">
+        <div class="deck-header">
+          <div class="deck-title-area">
+            <div class="deck-tag-row">
+              <span class="tag tag-level">기초 입문</span>
+              <span class="word-count">1,780 단어</span>
+            </div>
+            <h2 class="deck-name">JLPT N5 & N4 기초 완성 어휘</h2>
+          </div>
+        </div>
+        <p class="deck-desc">히라가나를 뗀 후 가장 먼저 익혀야 할 일본어 일상생활 및 초급 시험 필수 기초 어휘 총집합</p>
+        <div class="deck-actions">
+          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n5_n4_1780.txt', 'JLPT N5 & N4 어휘 (1,780개)')">
+            <span>📋</span> 전체 단어 복사하기
+          </button>
+          <button class="preview-toggle-btn" onclick="togglePreview('preview-n5-n4', 'bonus-data/jlpt_n5_n4_1780.txt')">
+            미리보기
+          </button>
+        </div>
+        <div id="preview-n5-n4" class="preview-box">불러오는 중...</div>
+      </div>
+
+      <!-- 2. JLPT N3 -->
+      <div class="deck-card">
+        <div class="deck-header">
+          <div class="deck-title-area">
+            <div class="deck-tag-row">
+              <span class="tag tag-level">중급 핵심</span>
+              <span class="word-count">1,546 단어</span>
+            </div>
+            <h2 class="deck-name">JLPT N3 실전 필수 어휘</h2>
+          </div>
+        </div>
+        <p class="deck-desc">자연스러운 일본어 회화와 N3 합격을 위해 가장 많은 수험생이 공부하는 핵심 빈출 어휘 팩</p>
+        <div class="deck-actions">
+          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n3_1546.txt', 'JLPT N3 어휘 (1,546개)')">
+            <span>📋</span> 전체 단어 복사하기
+          </button>
+          <button class="preview-toggle-btn" onclick="togglePreview('preview-n3', 'bonus-data/jlpt_n3_1546.txt')">
+            미리보기
+          </button>
+        </div>
+        <div id="preview-n3" class="preview-box">불러오는 중...</div>
+      </div>
+
+      <!-- 3. JLPT N2 -->
+      <div class="deck-card">
+        <div class="deck-header">
+          <div class="deck-title-area">
+            <div class="deck-tag-row">
+              <span class="tag tag-level">중고급 실전</span>
+              <span class="word-count">2,618 단어</span>
+            </div>
+            <h2 class="deck-name">JLPT N2 실전 도약 어휘</h2>
+          </div>
+        </div>
+        <p class="deck-desc">취업 및 워킹홀리데이, 일본 현지 생활에서 자주 접하는 신문·뉴스·비즈니스 실무 어휘 엄선</p>
+        <div class="deck-actions">
+          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n2_2618.txt', 'JLPT N2 어휘 (2,618개)')">
+            <span>📋</span> 전체 단어 복사하기
+          </button>
+          <button class="preview-toggle-btn" onclick="togglePreview('preview-n2', 'bonus-data/jlpt_n2_2618.txt')">
+            미리보기
+          </button>
+        </div>
+        <div id="preview-n2" class="preview-box">불러오는 중...</div>
+      </div>
+
+      <!-- 4. JLPT N1 -->
+      <div class="deck-card">
+        <div class="deck-header">
+          <div class="deck-title-area">
+            <div class="deck-tag-row">
+              <span class="tag tag-level">최고급 완성</span>
+              <span class="word-count">3,236 단어</span>
+            </div>
+            <h2 class="deck-name">JLPT N1 만점 공략 어휘</h2>
+          </div>
+        </div>
+        <p class="deck-desc">고난도 한자어, 관용 표현, 학술 및 심화 독해에 출제되는 N1 시험 완벽 대비용 고득점 어휘</p>
+        <div class="deck-actions">
+          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n1_3236.txt', 'JLPT N1 어휘 (3,236개)')">
+            <span>📋</span> 전체 단어 복사하기
+          </button>
+          <button class="preview-toggle-btn" onclick="togglePreview('preview-n1', 'bonus-data/jlpt_n1_3236.txt')">
+            미리보기
+          </button>
+        </div>
+        <div id="preview-n1" class="preview-box">불러오는 중...</div>
+      </div>
+
+      <!-- 5. 초등 상용한자 1,026자 -->
+      <div class="deck-card">
+        <div class="deck-header">
+          <div class="deck-title-area">
+            <div class="deck-tag-row">
+              <span class="tag tag-kanji">한자 1탄</span>
+              <span class="word-count">1,026 한자</span>
+            </div>
+            <h2 class="deck-name">일본 상용한자 1,026자 (초등 완전정복)</h2>
+          </div>
+        </div>
+        <p class="deck-desc">일본 초등학교 1학년~6학년 과정에서 배우는 필수 교육 한자 1,026자 (음독, 훈독, 대표 단어 포함)</p>
+        <div class="deck-actions">
+          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/kanji_elementary_1026.txt', '초등 상용한자 (1,026자)')">
+            <span>📋</span> 전체 단어 복사하기
+          </button>
+          <button class="preview-toggle-btn" onclick="togglePreview('preview-kanji-elem', 'bonus-data/kanji_elementary_1026.txt')">
+            미리보기
+          </button>
+        </div>
+        <div id="preview-kanji-elem" class="preview-box">불러오는 중...</div>
+      </div>
+
+      <!-- 6. 중고교 상용한자 1,110자 -->
+      <div class="deck-card">
+        <div class="deck-header">
+          <div class="deck-title-area">
+            <div class="deck-tag-row">
+              <span class="tag tag-kanji">한자 2탄</span>
+              <span class="word-count">1,110 한자</span>
+            </div>
+            <h2 class="deck-name">일본 상용한자 1,110자 (중고교 완전정복)</h2>
+          </div>
+        </div>
+        <p class="deck-desc">일본 중·고등학교 과정에서 다루는 심화 상용한자 1,110자 (신문 사설 및 전문 서적 독해 필수)</p>
+        <div class="deck-actions">
+          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/kanji_secondary_1110.txt', '중고교 상용한자 (1,110자)')">
+            <span>📋</span> 전체 단어 복사하기
+          </button>
+          <button class="preview-toggle-btn" onclick="togglePreview('preview-kanji-sec', 'bonus-data/kanji_secondary_1110.txt')">
+            미리보기
+          </button>
+        </div>
+        <div id="preview-kanji-sec" class="preview-box">불러오는 중...</div>
+      </div>
+
+      <!-- 7. 핵심 문법 예문집 5,000선 -->
+      <div class="deck-card">
+        <div class="deck-header">
+          <div class="deck-title-area">
+            <div class="deck-tag-row">
+              <span class="tag tag-grammar">문법 & 예문</span>
+              <span class="word-count">5,000 예문</span>
+            </div>
+            <h2 class="deck-name">JLPT 급수별 핵심 문법 & 예문집 5,000선</h2>
+          </div>
+        </div>
+        <p class="deck-desc">N5부터 N1까지의 핵심 문형과 실전 예문 5,000개를 한눈에 외울 수 있는 방대한 프리미엄 문법 컬렉션</p>
+        <div class="deck-actions">
+          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/grammar_5000.txt', '문법 예문집 5,000선')">
+            <span>📋</span> 전체 단어 복사하기
+          </button>
+          <button class="preview-toggle-btn" onclick="togglePreview('preview-grammar', 'bonus-data/grammar_5000.txt')">
+            미리보기
+          </button>
+        </div>
+        <div id="preview-grammar" class="preview-box">불러오는 중...</div>
+      </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+      <span>✅</span>
+      <span id="toast-msg">클립보드에 복사되었습니다! 앱에서 붙여넣기하세요.</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 GyuC Studio · 작심삼일본어 (OnVocab) 보너스 센터</p>
+    </footer>
+  </div>
+
+  <script>
+    // Cached texts
+    const deckCache = {};
+
+    async function getDeckText(fileUrl) {
+      if (deckCache[fileUrl]) {
+        return deckCache[fileUrl];
+      }
+      try {
+        const res = await fetch(fileUrl);
+        const text = await res.text();
+        deckCache[fileUrl] = text;
+        return text;
+      } catch (e) {
+        console.error('Fetch error:', e);
+        return null;
+      }
+    }
+
+    async function copyDeck(btn, fileUrl, name) {
+      const origHtml = btn.innerHTML;
+      btn.innerHTML = '<span>⏳</span> 복사 중...';
+      btn.disabled = true;
+
+      const text = await getDeckText(fileUrl);
+      if (!text) {
+        alert('단어 데이터를 불러오는데 실패했습니다.');
+        btn.innerHTML = origHtml;
+        btn.disabled = false;
+        return;
+      }
+
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          // Fallback for older browsers
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+
+        btn.classList.add('copied');
+        btn.innerHTML = '<span>✅</span> 복사 완료!';
+        showToast(`'${name}' 복사 완료! 앱에 붙여넣기하세요.`);
+
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = origHtml;
+          btn.disabled = false;
+        }, 2200);
+      } catch (err) {
+        alert('클립보드 복사 권한이 거부되었습니다. 미리보기에서 직접 복사해주세요.');
+        btn.innerHTML = origHtml;
+        btn.disabled = false;
+      }
+    }
+
+    async function togglePreview(boxId, fileUrl) {
+      const box = document.getElementById(boxId);
+      if (box.classList.contains('open')) {
+        box.classList.remove('open');
+        return;
+      }
+
+      box.classList.add('open');
+      if (box.dataset.loaded) return;
+
+      box.textContent = '데이터를 불러오는 중...';
+      const text = await getDeckText(fileUrl);
+      if (text) {
+        // Show only first 6 non-comment lines
+        const lines = text.split('\n').filter(l => l.trim() && !l.startsWith('#')).slice(0, 6);
+        box.textContent = lines.join('\n') + '\n\n... (이하 수천 개 단어 생략)';
+        box.dataset.loaded = 'true';
+      } else {
+        box.textContent = '데이터 로딩 실패';
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
