@@ -28,7 +28,7 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", "Noto Sans JP", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", "Noto Sans JP", "Noto Sans TC", "Noto Sans SC", sans-serif;
       background-color: var(--bg);
       color: var(--text-main);
       line-height: 1.6;
@@ -47,7 +47,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .back-btn {
@@ -69,20 +69,57 @@
       border-color: var(--accent);
     }
 
+    /* 언어 선택 바 (스튜디오 메인과 동일) */
+    .lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .lang-btn:hover {
+      color: var(--text-main);
+      border-color: #475569;
+      background: #243248;
+    }
+
+    .lang-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     /* Header */
     .header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
     .header-icon {
-      font-size: 40px;
+      font-size: 38px;
       margin-bottom: 6px;
       display: block;
     }
 
     .title {
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 800;
       letter-spacing: -0.5px;
       color: #fff;
@@ -90,12 +127,12 @@
     }
 
     .subtitle {
-      font-size: 14.5px;
+      font-size: 14px;
       color: var(--text-muted);
       word-break: keep-all;
     }
 
-    /* Main App Tabs (일본어 / 영어 / 한국어) */
+    /* Main App Switcher Tabs (일본어 / 영어 / 한국어) */
     .main-tabs {
       display: flex;
       gap: 8px;
@@ -111,7 +148,7 @@
       text-align: center;
       padding: 10px 8px;
       border-radius: 10px;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--text-muted);
       background: transparent;
@@ -186,7 +223,7 @@
     }
 
     .guide-title {
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 700;
       color: #60a5fa;
       display: flex;
@@ -433,29 +470,38 @@
   <div class="container">
     <!-- Top Nav -->
     <div class="top-nav">
-      <a href="index.html" class="back-btn">
+      <a href="index.html" class="back-btn" id="i18n-back-btn">
         <span>←</span> GyuC Studio 홈
       </a>
-      <span style="font-size: 12px; color: var(--text-muted);">보너스 단어장 공식 배포 센터</span>
+      <span style="font-size: 12px; color: var(--text-muted);" id="i18n-header-tag">보너스 단어장 공식 배포 센터</span>
     </div>
+
+    <!-- 다국어 선택 바 (스튜디오 메인과 연동) -->
+    <nav class="lang-bar" aria-label="Language selection">
+      <button class="lang-btn" data-lang="ko" onclick="setLanguage('ko')">🇰🇷 한국어</button>
+      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇺🇸 English</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLanguage('ja')">🇯🇵 日本語</button>
+      <button class="lang-btn" data-lang="zh" onclick="setLanguage('zh')">🇨🇳/🇹🇼 中文</button>
+      <button class="lang-btn" data-lang="es" onclick="setLanguage('es')">🇪🇸 Español</button>
+    </nav>
 
     <!-- Header -->
     <div class="header">
       <span class="header-icon">🎁</span>
-      <h1 class="title">공식 보너스 단어팩 센터</h1>
-      <p class="subtitle">터치 한 번으로 복사하여 앱에 즉시 등록할 수 있는 추천 단어장 모음</p>
+      <h1 class="title" id="i18n-title">공식 보너스 단어팩 센터</h1>
+      <p class="subtitle" id="i18n-subtitle">터치 한 번으로 복사하여 앱에 즉시 등록할 수 있는 추천 단어장 모음</p>
     </div>
 
     <!-- Main App Switcher Tabs -->
     <div class="main-tabs">
       <button class="main-tab active" onclick="switchAppTab('vocab')">
-        <span>🇯🇵</span> 작심삼일본어 (OnVocab)
+        <span>🇯🇵</span> <span id="i18n-tab-vocab">작심삼일본어 (OnVocab)</span>
       </button>
       <button class="main-tab" onclick="switchAppTab('english')">
-        <span>🇺🇸</span> 작심삼일영어 (OnEnglish)
+        <span>🇺🇸</span> <span id="i18n-tab-english">작심삼일영어 (OnEnglish)</span>
       </button>
       <button class="main-tab" onclick="switchAppTab('korean')">
-        <span>🇰🇷</span> 작심삼일한국어 (OnKorean)
+        <span>🇰🇷</span> <span id="i18n-tab-korean">작심삼일한국어 (OnKorean)</span>
       </button>
     </div>
 
@@ -463,20 +509,20 @@
     <div class="guide-box">
       <div class="guide-title">
         <span>💡</span>
-        <span>앱으로 가져오는 방법 (1초 컷!)</span>
+        <span id="i18n-guide-title">앱으로 가져오는 방법 (1초 컷!)</span>
       </div>
       <ol class="guide-steps">
         <li>
-          <span class="step-num">1단계</span>
-          <span>원하는 보너스팩 카드의 <strong>[📋 전체 단어 복사하기]</strong> 버튼을 터치합니다.</span>
+          <span class="step-num" id="i18n-step1-num">1단계</span>
+          <span id="i18n-step1-text">원하는 보너스팩 카드의 <strong>[📋 전체 단어 복사하기]</strong> 버튼을 터치합니다.</span>
         </li>
         <li>
-          <span class="step-num">2단계</span>
-          <span>앱 실행 ➔ <strong>설정</strong> ➔ <strong>[외부 단어장 일괄 가져오기]</strong> 터치!</span>
+          <span class="step-num" id="i18n-step2-num">2단계</span>
+          <span id="i18n-step2-text">앱 실행 ➔ <strong>설정</strong> ➔ <strong>[외부 단어장 일괄 가져오기]</strong> 터치!</span>
         </li>
         <li>
-          <span class="step-num">3단계</span>
-          <span>카테고리명(예: JLPT N3)을 입력하고 <strong>[붙여넣기]</strong>를 누르면 즉시 등록 완료! 🎉</span>
+          <span class="step-num" id="i18n-step3-num">3단계</span>
+          <span id="i18n-step3-text">카테고리명(예: JLPT N3)을 입력하고 <strong>[붙여넣기]</strong>를 누르면 즉시 등록 완료! 🎉</span>
         </li>
       </ol>
     </div>
@@ -484,12 +530,12 @@
     <!-- 1. ON-VOCAB (일본어) -->
     <div id="content-vocab" class="tab-content active">
       
-      <!-- Sub-tabs for Language of Definitions (KO vs Global EN) -->
+      <!-- Sub-tabs for Language of Definitions -->
       <div class="sub-tabs-container">
-        <span class="sub-tabs-label">단어 뜻풀이 언어 선택:</span>
+        <span class="sub-tabs-label" id="i18n-subtab-label">단어 뜻풀이 언어 선택:</span>
         <div class="sub-tabs">
-          <button class="sub-tab active" onclick="switchVocabLang('ko', this)">🇰🇷 한국어 뜻</button>
-          <button class="sub-tab" onclick="switchVocabLang('en', this)">🇺🇸 English (Global)</button>
+          <button class="sub-tab active" onclick="switchVocabLang('ko', this)" id="i18n-subtab-ko">🇰🇷 한국어 뜻</button>
+          <button class="sub-tab" onclick="switchVocabLang('en', this)" id="i18n-subtab-en">🇺🇸 English (Global)</button>
         </div>
       </div>
 
@@ -509,10 +555,10 @@
           <p class="deck-desc">히라가나를 뗀 후 가장 먼저 익혀야 할 일본어 일상생활 및 초급 시험 필수 기초 어휘 총집합</p>
           <div class="deck-actions">
             <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n5_n4_1780.txt', 'JLPT N5 & N4 어휘 (1,780개)')">
-              <span>📋</span> 전체 단어 복사하기
+              <span>📋</span> <span class="copy-btn-text">전체 단어 복사하기</span>
             </button>
             <button class="preview-toggle-btn" onclick="togglePreview('preview-n5-n4', 'bonus-data/jlpt_n5_n4_1780.txt', 1780)">
-              미리보기
+              <span class="preview-btn-text">미리보기</span>
             </button>
           </div>
           <div id="preview-n5-n4" class="preview-box"></div>
@@ -532,10 +578,10 @@
           <p class="deck-desc">자연스러운 일본어 회화와 N3 합격을 위해 가장 많은 수험생이 공부하는 핵심 빈출 어휘 팩</p>
           <div class="deck-actions">
             <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n3_1546.txt', 'JLPT N3 어휘 (1,546개)')">
-              <span>📋</span> 전체 단어 복사하기
+              <span>📋</span> <span class="copy-btn-text">전체 단어 복사하기</span>
             </button>
             <button class="preview-toggle-btn" onclick="togglePreview('preview-n3', 'bonus-data/jlpt_n3_1546.txt', 1546)">
-              미리보기
+              <span class="preview-btn-text">미리보기</span>
             </button>
           </div>
           <div id="preview-n3" class="preview-box"></div>
@@ -555,10 +601,10 @@
           <p class="deck-desc">취업 및 워킹홀리데이, 일본 현지 생활에서 자주 접하는 신문·뉴스·비즈니스 실무 어휘 엄선</p>
           <div class="deck-actions">
             <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n2_2618.txt', 'JLPT N2 어휘 (2,618개)')">
-              <span>📋</span> 전체 단어 복사하기
+              <span>📋</span> <span class="copy-btn-text">전체 단어 복사하기</span>
             </button>
             <button class="preview-toggle-btn" onclick="togglePreview('preview-n2', 'bonus-data/jlpt_n2_2618.txt', 2618)">
-              미리보기
+              <span class="preview-btn-text">미리보기</span>
             </button>
           </div>
           <div id="preview-n2" class="preview-box"></div>
@@ -578,10 +624,10 @@
           <p class="deck-desc">고난도 한자어, 관용 표현, 학술 및 심화 독해에 출제되는 N1 시험 완벽 대비용 고득점 어휘</p>
           <div class="deck-actions">
             <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n1_3236.txt', 'JLPT N1 어휘 (3,236개)')">
-              <span>📋</span> 전체 단어 복사하기
+              <span>📋</span> <span class="copy-btn-text">전체 단어 복사하기</span>
             </button>
             <button class="preview-toggle-btn" onclick="togglePreview('preview-n1', 'bonus-data/jlpt_n1_3236.txt', 3236)">
-              미리보기
+              <span class="preview-btn-text">미리보기</span>
             </button>
           </div>
           <div id="preview-n1" class="preview-box"></div>
@@ -601,10 +647,10 @@
           <p class="deck-desc">일본 초등학교 1학년~6학년 과정에서 배우는 필수 교육 한자 1,026자 (음독, 훈독, 대표 단어 포함)</p>
           <div class="deck-actions">
             <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/kanji_elementary_1026.txt', '초등 상용한자 (1,026자)')">
-              <span>📋</span> 전체 단어 복사하기
+              <span>📋</span> <span class="copy-btn-text">전체 단어 복사하기</span>
             </button>
             <button class="preview-toggle-btn" onclick="togglePreview('preview-kanji-elem', 'bonus-data/kanji_elementary_1026.txt', 1026)">
-              미리보기
+              <span class="preview-btn-text">미리보기</span>
             </button>
           </div>
           <div id="preview-kanji-elem" class="preview-box"></div>
@@ -624,10 +670,10 @@
           <p class="deck-desc">일본 중·고등학교 과정에서 다루는 심화 상용한자 1,110자 (신문 사설 및 전문 서적 독해 필수)</p>
           <div class="deck-actions">
             <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/kanji_secondary_1110.txt', '중고교 상용한자 (1,110자)')">
-              <span>📋</span> 전체 단어 복사하기
+              <span>📋</span> <span class="copy-btn-text">전체 단어 복사하기</span>
             </button>
             <button class="preview-toggle-btn" onclick="togglePreview('preview-kanji-sec', 'bonus-data/kanji_secondary_1110.txt', 1110)">
-              미리보기
+              <span class="preview-btn-text">미리보기</span>
             </button>
           </div>
           <div id="preview-kanji-sec" class="preview-box"></div>
@@ -647,10 +693,10 @@
           <p class="deck-desc">N5부터 N1까지의 핵심 문형과 실전 예문 5,000개를 한눈에 외울 수 있는 방대한 프리미엄 문법 컬렉션</p>
           <div class="deck-actions">
             <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/grammar_5000.txt', '문법 예문집 5,000선')">
-              <span>📋</span> 전체 단어 복사하기
+              <span>📋</span> <span class="copy-btn-text">전체 단어 복사하기</span>
             </button>
             <button class="preview-toggle-btn" onclick="togglePreview('preview-grammar', 'bonus-data/grammar_5000.txt', 5000)">
-              미리보기
+              <span class="preview-btn-text">미리보기</span>
             </button>
           </div>
           <div id="preview-grammar" class="preview-box"></div>
@@ -672,7 +718,7 @@
           <p class="deck-desc">Curated essential Japanese beginner vocabulary with English definitions and furigana, optimized for English speakers.</p>
           <div class="deck-actions">
             <button class="copy-btn" disabled>
-              <span>🔒</span> 순차 업데이트 예정
+              <span>🔒</span> <span class="coming-soon-btn-text">순차 업데이트 예정</span>
             </button>
           </div>
         </div>
@@ -690,7 +736,7 @@
           <p class="deck-desc">Core intermediate Japanese vocabulary with accurate English translations for global learners preparing for JLPT N3.</p>
           <div class="deck-actions">
             <button class="copy-btn" disabled>
-              <span>🔒</span> 순차 업데이트 예정
+              <span>🔒</span> <span class="coming-soon-btn-text">순차 업데이트 예정</span>
             </button>
           </div>
         </div>
@@ -713,7 +759,7 @@
           <p class="deck-desc">원어민 대화의 70%를 차지하는 필수 이어동사 및 일상 구동사 표현 엄선</p>
           <div class="deck-actions">
             <button class="copy-btn" disabled>
-              <span>🔒</span> 작심삼일영어 런칭 준비 중
+              <span>🔒</span> <span class="eng-soon-btn-text">작심삼일영어 런칭 준비 중</span>
             </button>
           </div>
         </div>
@@ -731,7 +777,7 @@
           <p class="deck-desc">글로벌 업무 환경에서 곧바로 활용할 수 있는 격식 있는 이메일 문구와 회의 표현</p>
           <div class="deck-actions">
             <button class="copy-btn" disabled>
-              <span>🔒</span> 작심삼일영어 런칭 준비 중
+              <span>🔒</span> <span class="eng-soon-btn-text">작심삼일영어 런칭 준비 중</span>
             </button>
           </div>
         </div>
@@ -749,7 +795,7 @@
           <p class="deck-desc">토익 RC 빈출 어휘 및 파트 5&6 정답률을 극대화하는 콜로케이션 연어 표현 모음</p>
           <div class="deck-actions">
             <button class="copy-btn" disabled>
-              <span>🔒</span> 작심삼일영어 런칭 준비 중
+              <span>🔒</span> <span class="eng-soon-btn-text">작심삼일영어 런칭 준비 중</span>
             </button>
           </div>
         </div>
@@ -772,7 +818,7 @@
           <p class="deck-desc">케이팝 아이돌 라이브와 한국 드라마에 자주 등장하는 생생한 일상 한국어 표현</p>
           <div class="deck-actions">
             <button class="copy-btn" disabled>
-              <span>🔒</span> 작심삼일한국어 런칭 준비 중
+              <span>🔒</span> <span class="kor-soon-btn-text">작심삼일한국어 런칭 준비 중</span>
             </button>
           </div>
         </div>
@@ -790,7 +836,7 @@
           <p class="deck-desc">명동, 홍대, 부산 등 한국 현지 여행에서 바로 통하는 필수 식당 주문 및 쇼핑 표현</p>
           <div class="deck-actions">
             <button class="copy-btn" disabled>
-              <span>🔒</span> 작심삼일한국어 런칭 준비 중
+              <span>🔒</span> <span class="kor-soon-btn-text">작심삼일한국어 런칭 준비 중</span>
             </button>
           </div>
         </div>
@@ -808,7 +854,7 @@
           <p class="deck-desc">한국어능력시험(TOPIK) 자격증 취득을 위한 등급별 핵심 어휘 총정리</p>
           <div class="deck-actions">
             <button class="copy-btn" disabled>
-              <span>🔒</span> 작심삼일한국어 런칭 준비 중
+              <span>🔒</span> <span class="kor-soon-btn-text">작심삼일한국어 런칭 준비 중</span>
             </button>
           </div>
         </div>
@@ -828,6 +874,185 @@
   </div>
 
   <script>
+    // 다국어 번역 사전
+    const translations = {
+      ko: {
+        backBtn: '← GyuC Studio 홈',
+        headerTag: '보너스 단어장 공식 배포 센터',
+        title: '공식 보너스 단어팩 센터',
+        subtitle: '터치 한 번으로 복사하여 앱에 즉시 등록할 수 있는 추천 단어장 모음',
+        tabVocab: '작심삼일본어 (OnVocab)',
+        tabEnglish: '작심삼일영어 (OnEnglish)',
+        tabKorean: '작심삼일한국어 (OnKorean)',
+        guideTitle: '앱으로 가져오는 방법 (1초 컷!)',
+        step1Num: '1단계',
+        step1Text: '원하는 보너스팩 카드의 <strong>[📋 전체 단어 복사하기]</strong> 버튼을 터치합니다.',
+        step2Num: '2단계',
+        step2Text: '앱 실행 ➔ <strong>설정</strong> ➔ <strong>[외부 단어장 일괄 가져오기]</strong> 터치!',
+        step3Num: '3단계',
+        step3Text: '카테고리명(예: JLPT N3)을 입력하고 <strong>[붙여넣기]</strong>를 누르면 즉시 등록 완료! 🎉',
+        subtabLabel: '단어 뜻풀이 언어 선택:',
+        subtabKo: '🇰🇷 한국어 뜻',
+        subtabEn: '🇺🇸 English (Global)',
+        copyBtnText: '전체 단어 복사하기',
+        previewBtnText: '미리보기',
+        copiedNotice: '복사 완료! 앱에 붙여넣기하세요.',
+        previewNotice: '💡 샘플 6개 미리보기 (상단 [전체 단어 복사하기] 터치 시 전수가 클립보드에 복사됩니다)',
+        comingSoonBtn: '순차 업데이트 예정',
+        engSoonBtn: '작심삼일영어 런칭 준비 중',
+        korSoonBtn: '작심삼일한국어 런칭 준비 중'
+      },
+      en: {
+        backBtn: '← GyuC Studio Home',
+        headerTag: 'Official Bonus Decks Distribution Center',
+        title: 'Official Bonus Vocabulary Decks',
+        subtitle: 'Curated premium decks you can copy and import into your apps with a single tap',
+        tabVocab: 'Japanese (OnVocab)',
+        tabEnglish: 'English (OnEnglish)',
+        tabKorean: 'Korean (OnKorean)',
+        guideTitle: 'How to Import into App (In 1 Sec!)',
+        step1Num: 'Step 1',
+        step1Text: 'Tap <strong>[📋 Copy All Words]</strong> on your desired bonus deck card.',
+        step2Num: 'Step 2',
+        step2Text: 'Open the App ➔ <strong>Settings</strong> ➔ Tap <strong>[Import Vocabulary Deck]</strong>.',
+        step3Num: 'Step 3',
+        step3Text: 'Enter category name and tap <strong>[Paste]</strong> to complete importing! 🎉',
+        subtabLabel: 'Definition Language:',
+        subtabKo: '🇰🇷 Korean Definitions',
+        subtabEn: '🇺🇸 English (Global)',
+        copyBtnText: 'Copy All Words',
+        previewBtnText: 'Preview',
+        copiedNotice: 'Copied to clipboard! Paste it into the app.',
+        previewNotice: '💡 6 sample words preview (Tap [Copy All Words] above to copy entire deck to clipboard)',
+        comingSoonBtn: 'Upcoming Update',
+        engSoonBtn: 'OnEnglish Launching Soon',
+        korSoonBtn: 'OnKorean Launching Soon'
+      },
+      ja: {
+        backBtn: '← GyuC Studio ホーム',
+        headerTag: '公式ボーナス単語帳配布センター',
+        title: '公式ボーナス単語パックセンター',
+        subtitle: 'ワンタップでコピーしてアプリにそのまま登録できるおすすめ単語帳コレクション',
+        tabVocab: '三日坊主日本語 (OnVocab)',
+        tabEnglish: '三日坊主英語 (OnEnglish)',
+        tabKorean: '三日坊主韓国語 (OnKorean)',
+        guideTitle: 'アプリへの取り込み方法 (1秒完了!)',
+        step1Num: 'ステップ1',
+        step1Text: 'お好みのカードの <strong>[📋 全単語をコピー]</strong> ボタンをタップします。',
+        step2Num: 'ステップ2',
+        step2Text: 'アプリを開く ➔ <strong>設定</strong> ➔ <strong>[外部単語帳のインポート]</strong> をタップ！',
+        step3Num: 'ステップ3',
+        step3Text: 'カテゴリ名を入力して <strong>[貼り付け]</strong> を押せば即座に登録完了！🎉',
+        subtabLabel: '意味の言語を選択:',
+        subtabKo: '🇰🇷 韓国語訳',
+        subtabEn: '🇺🇸 English (Global)',
+        copyBtnText: '全単語をコピー',
+        previewBtnText: 'プレビュー',
+        copiedNotice: 'クリップボードにコピーしました！アプリで貼り付けてください。',
+        previewNotice: '💡 サンプル6件プレビュー (上部の [全単語をコピー] を押すと全件がコピーされます)',
+        comingSoonBtn: '順次公開予定',
+        engSoonBtn: 'OnEnglish 近日公開',
+        korSoonBtn: 'OnKorean 近日公開'
+      },
+      zh: {
+        backBtn: '← GyuC Studio 主页',
+        headerTag: '官方特典词库中心',
+        title: '官方特典词库中心',
+        subtitle: '一键复制并导入App的精选推荐词汇包',
+        tabVocab: '三日日语 (OnVocab)',
+        tabEnglish: '三日英语 (OnEnglish)',
+        tabKorean: '三日韩语 (OnKorean)',
+        guideTitle: '导入App方法 (1秒搞定!)',
+        step1Num: '第1步',
+        step1Text: '点击所需词库卡片上的 <strong>[📋 复制全部单词]</strong> 按钮。',
+        step2Num: '第2步',
+        step2Text: '打开App ➔ <strong>设置</strong> ➔ 点击 <strong>[批量导入外部生词本]</strong>！',
+        step3Num: '第3步',
+        step3Text: '输入分类名称并点击 <strong>[粘贴]</strong> 即可完成导入！🎉',
+        subtabLabel: '释义语言选择:',
+        subtabKo: '🇰🇷 韩语释义',
+        subtabEn: '🇺🇸 English (全球版)',
+        copyBtnText: '复制全部单词',
+        previewBtnText: '预览',
+        copiedNotice: '已复制到剪贴板！请前往App粘贴。',
+        previewNotice: '💡 6条样本预览 (点击上方 [复制全部单词] 将完整复制所有词汇)',
+        comingSoonBtn: '即将更新',
+        engSoonBtn: 'OnEnglish 即将推出',
+        korSoonBtn: 'OnKorean 即将推出'
+      },
+      es: {
+        backBtn: '← Inicio GyuC Studio',
+        headerTag: 'Centro Oficial de Mazos Extra',
+        title: 'Centro Oficial de Mazos de Vocabulario',
+        subtitle: 'Mazos de vocabulario seleccionados para copiar e importar en un toque',
+        tabVocab: 'Japonés (OnVocab)',
+        tabEnglish: 'Inglés (OnEnglish)',
+        tabKorean: 'Coreano (OnKorean)',
+        guideTitle: 'Cómo importar a la app (¡En 1 segundo!)',
+        step1Num: 'Paso 1',
+        step1Text: 'Toca <strong>[📋 Copiar todas las palabras]</strong> en el mazo deseado.',
+        step2Num: 'Paso 2',
+        step2Text: 'Abre la App ➔ <strong>Ajustes</strong> ➔ Toca <strong>[Importar mazo]</strong>.',
+        step3Num: 'Paso 3',
+        step3Text: '¡Escribe el nombre de categoría y toca <strong>[Pegar]</strong> para completar! 🎉',
+        subtabLabel: 'Idioma de definiciones:',
+        subtabKo: '🇰🇷 Coreano',
+        subtabEn: '🇺🇸 English (Global)',
+        copyBtnText: 'Copiar todas las palabras',
+        previewBtnText: 'Vista previa',
+        copiedNotice: '¡Copiado al portapapeles! Pégalo en la app.',
+        previewNotice: '💡 Vista previa de 6 palabras (Toca [Copiar todas las palabras] arriba para copiar todo)',
+        comingSoonBtn: 'Próximamente',
+        engSoonBtn: 'OnEnglish Próximamente',
+        korSoonBtn: 'OnKorean Próximamente'
+      }
+    };
+
+    let currentUiLang = 'ko';
+
+    function setLanguage(lang) {
+      if (!translations[lang]) lang = 'ko';
+      currentUiLang = lang;
+      const t = translations[lang];
+
+      document.documentElement.lang = lang;
+
+      // Update button active states
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+
+      // Update UI Texts
+      document.getElementById('i18n-back-btn').innerHTML = `<span>←</span> ${t.backBtn.replace('← ', '')}`;
+      document.getElementById('i18n-header-tag').textContent = t.headerTag;
+      document.getElementById('i18n-title').textContent = t.title;
+      document.getElementById('i18n-subtitle').textContent = t.subtitle;
+      document.getElementById('i18n-tab-vocab').textContent = t.tabVocab;
+      document.getElementById('i18n-tab-english').textContent = t.tabEnglish;
+      document.getElementById('i18n-tab-korean').textContent = t.tabKorean;
+      document.getElementById('i18n-guide-title').textContent = t.guideTitle;
+      document.getElementById('i18n-step1-num').textContent = t.step1Num;
+      document.getElementById('i18n-step1-text').innerHTML = t.step1Text;
+      document.getElementById('i18n-step2-num').textContent = t.step2Num;
+      document.getElementById('i18n-step2-text').innerHTML = t.step2Text;
+      document.getElementById('i18n-step3-num').textContent = t.step3Num;
+      document.getElementById('i18n-step3-text').innerHTML = t.step3Text;
+      document.getElementById('i18n-subtab-label').textContent = t.subtabLabel;
+      document.getElementById('i18n-subtab-ko').textContent = t.subtabKo;
+      document.getElementById('i18n-subtab-en').textContent = t.subtabEn;
+
+      document.querySelectorAll('.copy-btn-text').forEach(el => el.textContent = t.copyBtnText);
+      document.querySelectorAll('.preview-btn-text').forEach(el => el.textContent = t.previewBtnText);
+      document.querySelectorAll('.coming-soon-btn-text').forEach(el => el.textContent = t.comingSoonBtn);
+      document.querySelectorAll('.eng-soon-btn-text').forEach(el => el.textContent = t.engSoonBtn);
+      document.querySelectorAll('.kor-soon-btn-text').forEach(el => el.textContent = t.korSoonBtn);
+
+      // Save preference in shared studio localStorage
+      try {
+        localStorage.setItem('gyuc_lang', lang);
+      } catch (e) {}
+    }
+
     // Tab Switching Logic
     function switchAppTab(appKey) {
       document.querySelectorAll('.main-tab').forEach(b => b.classList.remove('active'));
@@ -870,12 +1095,12 @@
 
     async function copyDeck(btn, fileUrl, name) {
       const origHtml = btn.innerHTML;
-      btn.innerHTML = '<span>⏳</span> 복사 중...';
+      btn.innerHTML = '<span>⏳</span> ...';
       btn.disabled = true;
 
       const text = await getDeckText(fileUrl);
       if (!text) {
-        alert('단어 데이터를 불러오는데 실패했습니다.');
+        alert('데이터 로딩에 실패했습니다.');
         btn.innerHTML = origHtml;
         btn.disabled = false;
         return;
@@ -896,9 +1121,10 @@
           document.body.removeChild(ta);
         }
 
+        const t = translations[currentUiLang] || translations.ko;
         btn.classList.add('copied');
-        btn.innerHTML = '<span>✅</span> 복사 완료!';
-        showToast(`'${name}' 복사 완료! 앱에 붙여넣기하세요.`);
+        btn.innerHTML = `<span>✅</span> ${t.copiedNotice.split('!')[0]}!`;
+        showToast(t.copiedNotice);
 
         setTimeout(() => {
           btn.classList.remove('copied');
@@ -906,7 +1132,7 @@
           btn.disabled = false;
         }, 2200);
       } catch (err) {
-        alert('클립보드 복사 권한이 거부되었습니다. 미리보기에서 직접 복사해주세요.');
+        alert('클립보드 복사 권한이 거부되었습니다.');
         btn.innerHTML = origHtml;
         btn.disabled = false;
       }
@@ -922,14 +1148,15 @@
       box.classList.add('open');
       if (box.dataset.loaded) return;
 
-      box.textContent = '데이터를 불러오는 중...';
+      box.textContent = '...';
       const text = await getDeckText(fileUrl);
       if (text) {
+        const t = translations[currentUiLang] || translations.ko;
         const lines = text.split('\n').filter(l => l.trim() && !l.startsWith('#')).slice(0, 6);
-        box.innerHTML = `<div class="preview-notice">💡 샘플 6개 미리보기 (상단 [전체 단어 복사하기] 터치 시 ${totalCount.toLocaleString()}개 전수가 클립보드에 복사됩니다)</div>` + lines.join('\n') + `\n\n... (외 ${ (totalCount - 6).toLocaleString() }개 단어 포함)`;
+        box.innerHTML = `<div class="preview-notice">${t.previewNotice}</div>` + lines.join('\n') + `\n\n... (${totalCount.toLocaleString()})`;
         box.dataset.loaded = 'true';
       } else {
-        box.textContent = '데이터 로딩 실패';
+        box.textContent = 'Failed to load';
       }
     }
 
@@ -942,6 +1169,32 @@
         toast.classList.remove('show');
       }, 2500);
     }
+
+    // Auto-detect browser or saved language
+    (function initLanguage() {
+      let saved = null;
+      try {
+        saved = localStorage.getItem('gyuc_lang');
+      } catch (e) {}
+
+      if (saved && translations[saved]) {
+        setLanguage(saved);
+        return;
+      }
+
+      const browserLang = (navigator.language || navigator.userLanguage || 'ko').toLowerCase();
+      if (browserLang.startsWith('ja')) {
+        setLanguage('ja');
+      } else if (browserLang.startsWith('zh')) {
+        setLanguage('zh');
+      } else if (browserLang.startsWith('es')) {
+        setLanguage('es');
+      } else if (browserLang.startsWith('en')) {
+        setLanguage('en');
+      } else {
+        setLanguage('ko');
+      }
+    })();
   </script>
 </body>
 </html>
