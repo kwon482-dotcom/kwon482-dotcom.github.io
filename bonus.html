@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>보너스 단어장 배포 센터 - GyuC Studio</title>
-  <meta name="description" content="작심삼일본어(OnVocab) 공식 보너스 단어장 무료 다운로드 및 원클릭 복사">
+  <title>GyuC Studio - 공식 보너스 단어팩 센터</title>
+  <meta name="description" content="작심삼일본어, 작심삼일영어, 작심삼일한국어 공식 보너스 단어장 무료 다운로드 및 원클릭 복사">
   <link rel="icon" type="image/png" href="icons/on-wallet.png">
   <style>
     :root {
@@ -32,22 +32,22 @@
       background-color: var(--bg);
       color: var(--text-main);
       line-height: 1.6;
-      padding: 24px 16px 64px;
+      padding: 20px 16px 64px;
       min-height: 100vh;
     }
 
     .container {
-      max-width: 680px;
+      max-width: 720px;
       width: 100%;
       margin: 0 auto;
     }
 
-    /* Navigation */
+    /* Top Nav */
     .top-nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .back-btn {
@@ -56,7 +56,7 @@
       gap: 6px;
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13.5px;
       padding: 6px 12px;
       border-radius: 8px;
       background: var(--card-bg);
@@ -72,55 +72,135 @@
     /* Header */
     .header {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .header-icon {
-      font-size: 44px;
-      margin-bottom: 8px;
+      font-size: 40px;
+      margin-bottom: 6px;
       display: block;
     }
 
     .title {
-      font-size: 26px;
+      font-size: 25px;
       font-weight: 800;
       letter-spacing: -0.5px;
       color: #fff;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .subtitle {
-      font-size: 15px;
+      font-size: 14.5px;
       color: var(--text-muted);
       word-break: keep-all;
     }
 
-    /* Guide Box */
+    /* Main App Tabs (일본어 / 영어 / 한국어) */
+    .main-tabs {
+      display: flex;
+      gap: 8px;
+      background: #090d16;
+      padding: 6px;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 20px;
+    }
+
+    .main-tab {
+      flex: 1;
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .main-tab:hover {
+      color: var(--text-main);
+    }
+
+    .main-tab.active {
+      background: var(--card-bg);
+      color: var(--accent);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    /* Sub Tabs (KO / EN) */
+    .sub-tabs-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      background: rgba(30, 41, 59, 0.5);
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+    }
+
+    .sub-tabs-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .sub-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .sub-tab {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sub-tab.active {
+      background: #0284c7;
+      color: #fff;
+    }
+
+    /* Quick Guide Box */
     .guide-box {
       background: rgba(30, 41, 59, 0.85);
       border: 1px solid #3b82f6;
       border-radius: 14px;
-      padding: 18px 20px;
-      margin-bottom: 28px;
+      padding: 16px 18px;
+      margin-bottom: 22px;
       box-shadow: 0 4px 20px rgba(59, 130, 246, 0.12);
     }
 
     .guide-title {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
       color: #60a5fa;
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .guide-steps {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      font-size: 13.5px;
+      gap: 6px;
+      font-size: 13px;
       color: #cbd5e1;
     }
 
@@ -134,31 +214,43 @@
       background: #1e3a8a;
       color: #93c5fd;
       font-weight: 700;
-      font-size: 12px;
-      padding: 2px 7px;
-      border-radius: 6px;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 5px;
       flex-shrink: 0;
       margin-top: 2px;
     }
 
     /* Card List */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
     .deck-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
     .deck-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 14px;
-      padding: 20px;
+      padding: 18px;
       transition: all 0.2s;
     }
 
     .deck-card:hover {
       border-color: rgba(56, 189, 248, 0.5);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .deck-card.coming-soon {
+      opacity: 0.85;
+      border-style: dashed;
     }
 
     .deck-header {
@@ -166,7 +258,7 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .deck-title-area {
@@ -177,31 +269,21 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .tag {
       font-size: 11px;
       font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 6px;
+      padding: 2px 7px;
+      border-radius: 5px;
       text-transform: uppercase;
     }
 
-    .tag-level {
-      background: #0369a1;
-      color: #e0f2fe;
-    }
-
-    .tag-kanji {
-      background: #7c2d12;
-      color: #ffedd5;
-    }
-
-    .tag-grammar {
-      background: #4c1d95;
-      color: #ede9fe;
-    }
+    .tag-level { background: #0369a1; color: #e0f2fe; }
+    .tag-kanji { background: #7c2d12; color: #ffedd5; }
+    .tag-grammar { background: #4c1d95; color: #ede9fe; }
+    .tag-soon { background: #78350f; color: #fde68a; }
 
     .word-count {
       font-size: 12px;
@@ -210,7 +292,7 @@
     }
 
     .deck-name {
-      font-size: 17px;
+      font-size: 16.5px;
       font-weight: 700;
       color: #fff;
     }
@@ -218,7 +300,7 @@
     .deck-desc {
       font-size: 13.5px;
       color: var(--text-muted);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       line-height: 1.5;
       word-break: keep-all;
     }
@@ -226,7 +308,7 @@
     /* Actions */
     .deck-actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
     .copy-btn {
@@ -234,14 +316,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       background: #0284c7;
       color: #fff;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
-      padding: 12px 16px;
+      padding: 11px 14px;
       border: none;
-      border-radius: 10px;
+      border-radius: 9px;
       cursor: pointer;
       transition: all 0.2s;
       user-select: none;
@@ -259,14 +341,20 @@
       background: var(--success) !important;
     }
 
+    .copy-btn:disabled {
+      background: #475569;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
     .preview-toggle-btn {
       background: #334155;
       color: #cbd5e1;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
-      padding: 12px 14px;
+      padding: 11px 13px;
       border: 1px solid #475569;
-      border-radius: 10px;
+      border-radius: 9px;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -276,25 +364,31 @@
       color: #fff;
     }
 
-    /* Preview box */
     .preview-box {
       display: none;
-      margin-top: 14px;
+      margin-top: 12px;
       background: #090d16;
       border: 1px dashed #334155;
       border-radius: 8px;
-      padding: 12px 14px;
+      padding: 12px;
       font-size: 12px;
       color: #94a3b8;
       font-family: monospace;
       white-space: pre-wrap;
       word-break: break-all;
-      max-height: 180px;
+      max-height: 160px;
       overflow-y: auto;
     }
 
     .preview-box.open {
       display: block;
+    }
+
+    .preview-notice {
+      color: #38bdf8;
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 11.5px;
     }
 
     /* Toast */
@@ -305,9 +399,9 @@
       transform: translateX(-50%) translateY(100px);
       background: #10b981;
       color: #fff;
-      padding: 12px 24px;
+      padding: 12px 22px;
       border-radius: 30px;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
       opacity: 0;
@@ -316,6 +410,8 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      width: max-content;
+      max-width: 90vw;
     }
 
     .toast.show {
@@ -327,7 +423,7 @@
     .footer {
       margin-top: 48px;
       text-align: center;
-      font-size: 12.5px;
+      font-size: 12px;
       color: #64748b;
     }
   </style>
@@ -340,7 +436,7 @@
       <a href="index.html" class="back-btn">
         <span>←</span> GyuC Studio 홈
       </a>
-      <span style="font-size: 12px; color: var(--text-muted);">작심삼일본어(OnVocab)</span>
+      <span style="font-size: 12px; color: var(--text-muted);">보너스 단어장 공식 배포 센터</span>
     </div>
 
     <!-- Header -->
@@ -348,6 +444,19 @@
       <span class="header-icon">🎁</span>
       <h1 class="title">공식 보너스 단어팩 센터</h1>
       <p class="subtitle">터치 한 번으로 복사하여 앱에 즉시 등록할 수 있는 추천 단어장 모음</p>
+    </div>
+
+    <!-- Main App Switcher Tabs -->
+    <div class="main-tabs">
+      <button class="main-tab active" onclick="switchAppTab('vocab')">
+        <span>🇯🇵</span> 작심삼일본어 (OnVocab)
+      </button>
+      <button class="main-tab" onclick="switchAppTab('english')">
+        <span>🇺🇸</span> 작심삼일영어 (OnEnglish)
+      </button>
+      <button class="main-tab" onclick="switchAppTab('korean')">
+        <span>🇰🇷</span> 작심삼일한국어 (OnKorean)
+      </button>
     </div>
 
     <!-- Quick Guide Box -->
@@ -363,7 +472,7 @@
         </li>
         <li>
           <span class="step-num">2단계</span>
-          <span><strong>작심삼일본어</strong> 앱 실행 ➔ <strong>설정</strong> ➔ <strong>[외부 단어장 일괄 가져오기]</strong> 터치!</span>
+          <span>앱 실행 ➔ <strong>설정</strong> ➔ <strong>[외부 단어장 일괄 가져오기]</strong> 터치!</span>
         </li>
         <li>
           <span class="step-num">3단계</span>
@@ -372,170 +481,338 @@
       </ol>
     </div>
 
-    <!-- Deck Cards -->
-    <div class="deck-list">
-
-      <!-- 1. JLPT N5 & N4 -->
-      <div class="deck-card">
-        <div class="deck-header">
-          <div class="deck-title-area">
-            <div class="deck-tag-row">
-              <span class="tag tag-level">기초 입문</span>
-              <span class="word-count">1,780 단어</span>
-            </div>
-            <h2 class="deck-name">JLPT N5 & N4 기초 완성 어휘</h2>
-          </div>
+    <!-- 1. ON-VOCAB (일본어) -->
+    <div id="content-vocab" class="tab-content active">
+      
+      <!-- Sub-tabs for Language of Definitions (KO vs Global EN) -->
+      <div class="sub-tabs-container">
+        <span class="sub-tabs-label">단어 뜻풀이 언어 선택:</span>
+        <div class="sub-tabs">
+          <button class="sub-tab active" onclick="switchVocabLang('ko', this)">🇰🇷 한국어 뜻</button>
+          <button class="sub-tab" onclick="switchVocabLang('en', this)">🇺🇸 English (Global)</button>
         </div>
-        <p class="deck-desc">히라가나를 뗀 후 가장 먼저 익혀야 할 일본어 일상생활 및 초급 시험 필수 기초 어휘 총집합</p>
-        <div class="deck-actions">
-          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n5_n4_1780.txt', 'JLPT N5 & N4 어휘 (1,780개)')">
-            <span>📋</span> 전체 단어 복사하기
-          </button>
-          <button class="preview-toggle-btn" onclick="togglePreview('preview-n5-n4', 'bonus-data/jlpt_n5_n4_1780.txt')">
-            미리보기
-          </button>
-        </div>
-        <div id="preview-n5-n4" class="preview-box">불러오는 중...</div>
       </div>
 
-      <!-- 2. JLPT N3 -->
-      <div class="deck-card">
-        <div class="deck-header">
-          <div class="deck-title-area">
-            <div class="deck-tag-row">
-              <span class="tag tag-level">중급 핵심</span>
-              <span class="word-count">1,546 단어</span>
+      <!-- KO Packs -->
+      <div id="vocab-ko-decks" class="deck-list">
+        <!-- 1. JLPT N5 & N4 -->
+        <div class="deck-card">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">기초 입문</span>
+                <span class="word-count">1,780 단어</span>
+              </div>
+              <h2 class="deck-name">JLPT N5 & N4 기초 완성 어휘</h2>
             </div>
-            <h2 class="deck-name">JLPT N3 실전 필수 어휘</h2>
           </div>
+          <p class="deck-desc">히라가나를 뗀 후 가장 먼저 익혀야 할 일본어 일상생활 및 초급 시험 필수 기초 어휘 총집합</p>
+          <div class="deck-actions">
+            <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n5_n4_1780.txt', 'JLPT N5 & N4 어휘 (1,780개)')">
+              <span>📋</span> 전체 단어 복사하기
+            </button>
+            <button class="preview-toggle-btn" onclick="togglePreview('preview-n5-n4', 'bonus-data/jlpt_n5_n4_1780.txt', 1780)">
+              미리보기
+            </button>
+          </div>
+          <div id="preview-n5-n4" class="preview-box"></div>
         </div>
-        <p class="deck-desc">자연스러운 일본어 회화와 N3 합격을 위해 가장 많은 수험생이 공부하는 핵심 빈출 어휘 팩</p>
-        <div class="deck-actions">
-          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n3_1546.txt', 'JLPT N3 어휘 (1,546개)')">
-            <span>📋</span> 전체 단어 복사하기
-          </button>
-          <button class="preview-toggle-btn" onclick="togglePreview('preview-n3', 'bonus-data/jlpt_n3_1546.txt')">
-            미리보기
-          </button>
+
+        <!-- 2. JLPT N3 -->
+        <div class="deck-card">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">중급 핵심</span>
+                <span class="word-count">1,546 단어</span>
+              </div>
+              <h2 class="deck-name">JLPT N3 실전 필수 어휘</h2>
+            </div>
+          </div>
+          <p class="deck-desc">자연스러운 일본어 회화와 N3 합격을 위해 가장 많은 수험생이 공부하는 핵심 빈출 어휘 팩</p>
+          <div class="deck-actions">
+            <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n3_1546.txt', 'JLPT N3 어휘 (1,546개)')">
+              <span>📋</span> 전체 단어 복사하기
+            </button>
+            <button class="preview-toggle-btn" onclick="togglePreview('preview-n3', 'bonus-data/jlpt_n3_1546.txt', 1546)">
+              미리보기
+            </button>
+          </div>
+          <div id="preview-n3" class="preview-box"></div>
         </div>
-        <div id="preview-n3" class="preview-box">불러오는 중...</div>
+
+        <!-- 3. JLPT N2 -->
+        <div class="deck-card">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">중고급 실전</span>
+                <span class="word-count">2,618 단어</span>
+              </div>
+              <h2 class="deck-name">JLPT N2 실전 도약 어휘</h2>
+            </div>
+          </div>
+          <p class="deck-desc">취업 및 워킹홀리데이, 일본 현지 생활에서 자주 접하는 신문·뉴스·비즈니스 실무 어휘 엄선</p>
+          <div class="deck-actions">
+            <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n2_2618.txt', 'JLPT N2 어휘 (2,618개)')">
+              <span>📋</span> 전체 단어 복사하기
+            </button>
+            <button class="preview-toggle-btn" onclick="togglePreview('preview-n2', 'bonus-data/jlpt_n2_2618.txt', 2618)">
+              미리보기
+            </button>
+          </div>
+          <div id="preview-n2" class="preview-box"></div>
+        </div>
+
+        <!-- 4. JLPT N1 -->
+        <div class="deck-card">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">최고급 완성</span>
+                <span class="word-count">3,236 단어</span>
+              </div>
+              <h2 class="deck-name">JLPT N1 만점 공략 어휘</h2>
+            </div>
+          </div>
+          <p class="deck-desc">고난도 한자어, 관용 표현, 학술 및 심화 독해에 출제되는 N1 시험 완벽 대비용 고득점 어휘</p>
+          <div class="deck-actions">
+            <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n1_3236.txt', 'JLPT N1 어휘 (3,236개)')">
+              <span>📋</span> 전체 단어 복사하기
+            </button>
+            <button class="preview-toggle-btn" onclick="togglePreview('preview-n1', 'bonus-data/jlpt_n1_3236.txt', 3236)">
+              미리보기
+            </button>
+          </div>
+          <div id="preview-n1" class="preview-box"></div>
+        </div>
+
+        <!-- 5. 초등 상용한자 1,026자 -->
+        <div class="deck-card">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-kanji">한자 1탄</span>
+                <span class="word-count">1,026 한자</span>
+              </div>
+              <h2 class="deck-name">일본 상용한자 1,026자 (초등 완전정복)</h2>
+            </div>
+          </div>
+          <p class="deck-desc">일본 초등학교 1학년~6학년 과정에서 배우는 필수 교육 한자 1,026자 (음독, 훈독, 대표 단어 포함)</p>
+          <div class="deck-actions">
+            <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/kanji_elementary_1026.txt', '초등 상용한자 (1,026자)')">
+              <span>📋</span> 전체 단어 복사하기
+            </button>
+            <button class="preview-toggle-btn" onclick="togglePreview('preview-kanji-elem', 'bonus-data/kanji_elementary_1026.txt', 1026)">
+              미리보기
+            </button>
+          </div>
+          <div id="preview-kanji-elem" class="preview-box"></div>
+        </div>
+
+        <!-- 6. 중고교 상용한자 1,110자 -->
+        <div class="deck-card">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-kanji">한자 2탄</span>
+                <span class="word-count">1,110 한자</span>
+              </div>
+              <h2 class="deck-name">일본 상용한자 1,110자 (중고교 완전정복)</h2>
+            </div>
+          </div>
+          <p class="deck-desc">일본 중·고등학교 과정에서 다루는 심화 상용한자 1,110자 (신문 사설 및 전문 서적 독해 필수)</p>
+          <div class="deck-actions">
+            <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/kanji_secondary_1110.txt', '중고교 상용한자 (1,110자)')">
+              <span>📋</span> 전체 단어 복사하기
+            </button>
+            <button class="preview-toggle-btn" onclick="togglePreview('preview-kanji-sec', 'bonus-data/kanji_secondary_1110.txt', 1110)">
+              미리보기
+            </button>
+          </div>
+          <div id="preview-kanji-sec" class="preview-box"></div>
+        </div>
+
+        <!-- 7. 핵심 문법 예문집 5,000선 -->
+        <div class="deck-card">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-grammar">문법 & 예문</span>
+                <span class="word-count">5,000 예문</span>
+              </div>
+              <h2 class="deck-name">JLPT 급수별 핵심 문법 & 예문집 5,000선</h2>
+            </div>
+          </div>
+          <p class="deck-desc">N5부터 N1까지의 핵심 문형과 실전 예문 5,000개를 한눈에 외울 수 있는 방대한 프리미엄 문법 컬렉션</p>
+          <div class="deck-actions">
+            <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/grammar_5000.txt', '문법 예문집 5,000선')">
+              <span>📋</span> 전체 단어 복사하기
+            </button>
+            <button class="preview-toggle-btn" onclick="togglePreview('preview-grammar', 'bonus-data/grammar_5000.txt', 5000)">
+              미리보기
+            </button>
+          </div>
+          <div id="preview-grammar" class="preview-box"></div>
+        </div>
       </div>
 
-      <!-- 3. JLPT N2 -->
-      <div class="deck-card">
-        <div class="deck-header">
-          <div class="deck-title-area">
-            <div class="deck-tag-row">
-              <span class="tag tag-level">중고급 실전</span>
-              <span class="word-count">2,618 단어</span>
+      <!-- EN Global Packs (Placeholders & Ready) -->
+      <div id="vocab-en-decks" class="deck-list" style="display: none;">
+        <div class="deck-card coming-soon">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">Global N5/N4</span>
+                <span class="tag tag-soon">Coming Soon</span>
+              </div>
+              <h2 class="deck-name">JLPT N5 & N4 Starter Pack (English Meanings)</h2>
             </div>
-            <h2 class="deck-name">JLPT N2 실전 도약 어휘</h2>
+          </div>
+          <p class="deck-desc">Curated essential Japanese beginner vocabulary with English definitions and furigana, optimized for English speakers.</p>
+          <div class="deck-actions">
+            <button class="copy-btn" disabled>
+              <span>🔒</span> 순차 업데이트 예정
+            </button>
           </div>
         </div>
-        <p class="deck-desc">취업 및 워킹홀리데이, 일본 현지 생활에서 자주 접하는 신문·뉴스·비즈니스 실무 어휘 엄선</p>
-        <div class="deck-actions">
-          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n2_2618.txt', 'JLPT N2 어휘 (2,618개)')">
-            <span>📋</span> 전체 단어 복사하기
-          </button>
-          <button class="preview-toggle-btn" onclick="togglePreview('preview-n2', 'bonus-data/jlpt_n2_2618.txt')">
-            미리보기
-          </button>
-        </div>
-        <div id="preview-n2" class="preview-box">불러오는 중...</div>
-      </div>
 
-      <!-- 4. JLPT N1 -->
-      <div class="deck-card">
-        <div class="deck-header">
-          <div class="deck-title-area">
-            <div class="deck-tag-row">
-              <span class="tag tag-level">최고급 완성</span>
-              <span class="word-count">3,236 단어</span>
+        <div class="deck-card coming-soon">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">Global N3</span>
+                <span class="tag tag-soon">Coming Soon</span>
+              </div>
+              <h2 class="deck-name">JLPT N3 Intermediate Mastery (English Meanings)</h2>
             </div>
-            <h2 class="deck-name">JLPT N1 만점 공략 어휘</h2>
+          </div>
+          <p class="deck-desc">Core intermediate Japanese vocabulary with accurate English translations for global learners preparing for JLPT N3.</p>
+          <div class="deck-actions">
+            <button class="copy-btn" disabled>
+              <span>🔒</span> 순차 업데이트 예정
+            </button>
           </div>
         </div>
-        <p class="deck-desc">고난도 한자어, 관용 표현, 학술 및 심화 독해에 출제되는 N1 시험 완벽 대비용 고득점 어휘</p>
-        <div class="deck-actions">
-          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/jlpt_n1_3236.txt', 'JLPT N1 어휘 (3,236개)')">
-            <span>📋</span> 전체 단어 복사하기
-          </button>
-          <button class="preview-toggle-btn" onclick="togglePreview('preview-n1', 'bonus-data/jlpt_n1_3236.txt')">
-            미리보기
-          </button>
-        </div>
-        <div id="preview-n1" class="preview-box">불러오는 중...</div>
       </div>
+    </div>
 
-      <!-- 5. 초등 상용한자 1,026자 -->
-      <div class="deck-card">
-        <div class="deck-header">
-          <div class="deck-title-area">
-            <div class="deck-tag-row">
-              <span class="tag tag-kanji">한자 1탄</span>
-              <span class="word-count">1,026 한자</span>
+    <!-- 2. ON-ENGLISH (영어) -->
+    <div id="content-english" class="tab-content">
+      <div class="deck-list">
+        <div class="deck-card coming-soon">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">미드 & 회화</span>
+                <span class="tag tag-soon">오픈 준비 중</span>
+              </div>
+              <h2 class="deck-name">미드 & 영화 빈출 구동사 (Phrasal Verbs) 500</h2>
             </div>
-            <h2 class="deck-name">일본 상용한자 1,026자 (초등 완전정복)</h2>
+          </div>
+          <p class="deck-desc">원어민 대화의 70%를 차지하는 필수 이어동사 및 일상 구동사 표현 엄선</p>
+          <div class="deck-actions">
+            <button class="copy-btn" disabled>
+              <span>🔒</span> 작심삼일영어 런칭 준비 중
+            </button>
           </div>
         </div>
-        <p class="deck-desc">일본 초등학교 1학년~6학년 과정에서 배우는 필수 교육 한자 1,026자 (음독, 훈독, 대표 단어 포함)</p>
-        <div class="deck-actions">
-          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/kanji_elementary_1026.txt', '초등 상용한자 (1,026자)')">
-            <span>📋</span> 전체 단어 복사하기
-          </button>
-          <button class="preview-toggle-btn" onclick="togglePreview('preview-kanji-elem', 'bonus-data/kanji_elementary_1026.txt')">
-            미리보기
-          </button>
-        </div>
-        <div id="preview-kanji-elem" class="preview-box">불러오는 중...</div>
-      </div>
 
-      <!-- 6. 중고교 상용한자 1,110자 -->
-      <div class="deck-card">
-        <div class="deck-header">
-          <div class="deck-title-area">
-            <div class="deck-tag-row">
-              <span class="tag tag-kanji">한자 2탄</span>
-              <span class="word-count">1,110 한자</span>
+        <div class="deck-card coming-soon">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">비즈니스 실무</span>
+                <span class="tag tag-soon">오픈 준비 중</span>
+              </div>
+              <h2 class="deck-name">실전 비즈니스 이메일 & 미팅 필수 표현 300</h2>
             </div>
-            <h2 class="deck-name">일본 상용한자 1,110자 (중고교 완전정복)</h2>
+          </div>
+          <p class="deck-desc">글로벌 업무 환경에서 곧바로 활용할 수 있는 격식 있는 이메일 문구와 회의 표현</p>
+          <div class="deck-actions">
+            <button class="copy-btn" disabled>
+              <span>🔒</span> 작심삼일영어 런칭 준비 중
+            </button>
           </div>
         </div>
-        <p class="deck-desc">일본 중·고등학교 과정에서 다루는 심화 상용한자 1,110자 (신문 사설 및 전문 서적 독해 필수)</p>
-        <div class="deck-actions">
-          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/kanji_secondary_1110.txt', '중고교 상용한자 (1,110자)')">
-            <span>📋</span> 전체 단어 복사하기
-          </button>
-          <button class="preview-toggle-btn" onclick="togglePreview('preview-kanji-sec', 'bonus-data/kanji_secondary_1110.txt')">
-            미리보기
-          </button>
-        </div>
-        <div id="preview-kanji-sec" class="preview-box">불러오는 중...</div>
-      </div>
 
-      <!-- 7. 핵심 문법 예문집 5,000선 -->
-      <div class="deck-card">
-        <div class="deck-header">
-          <div class="deck-title-area">
-            <div class="deck-tag-row">
-              <span class="tag tag-grammar">문법 & 예문</span>
-              <span class="word-count">5,000 예문</span>
+        <div class="deck-card coming-soon">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">수험 & 시험</span>
+                <span class="tag tag-soon">오픈 준비 중</span>
+              </div>
+              <h2 class="deck-name">토익(TOEIC) 900+ 파트5 고난도 어휘 500</h2>
             </div>
-            <h2 class="deck-name">JLPT 급수별 핵심 문법 & 예문집 5,000선</h2>
+          </div>
+          <p class="deck-desc">토익 RC 빈출 어휘 및 파트 5&6 정답률을 극대화하는 콜로케이션 연어 표현 모음</p>
+          <div class="deck-actions">
+            <button class="copy-btn" disabled>
+              <span>🔒</span> 작심삼일영어 런칭 준비 중
+            </button>
           </div>
         </div>
-        <p class="deck-desc">N5부터 N1까지의 핵심 문형과 실전 예문 5,000개를 한눈에 외울 수 있는 방대한 프리미엄 문법 컬렉션</p>
-        <div class="deck-actions">
-          <button class="copy-btn" onclick="copyDeck(this, 'bonus-data/grammar_5000.txt', '문법 예문집 5,000선')">
-            <span>📋</span> 전체 단어 복사하기
-          </button>
-          <button class="preview-toggle-btn" onclick="togglePreview('preview-grammar', 'bonus-data/grammar_5000.txt')">
-            미리보기
-          </button>
-        </div>
-        <div id="preview-grammar" class="preview-box">불러오는 중...</div>
       </div>
+    </div>
 
+    <!-- 3. ON-KOREAN (한국어) -->
+    <div id="content-korean" class="tab-content">
+      <div class="deck-list">
+        <div class="deck-card coming-soon">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">K-Culture</span>
+                <span class="tag tag-soon">오픈 준비 중</span>
+              </div>
+              <h2 class="deck-name">K-POP & K-Drama 필수 실전 한국어 회화 300</h2>
+            </div>
+          </div>
+          <p class="deck-desc">케이팝 아이돌 라이브와 한국 드라마에 자주 등장하는 생생한 일상 한국어 표현</p>
+          <div class="deck-actions">
+            <button class="copy-btn" disabled>
+              <span>🔒</span> 작심삼일한국어 런칭 준비 중
+            </button>
+          </div>
+        </div>
+
+        <div class="deck-card coming-soon">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">여행 & 식당</span>
+                <span class="tag tag-soon">오픈 준비 중</span>
+              </div>
+              <h2 class="deck-name">한국 여행·쇼핑·식당 생존 한국어 표현</h2>
+            </div>
+          </div>
+          <p class="deck-desc">명동, 홍대, 부산 등 한국 현지 여행에서 바로 통하는 필수 식당 주문 및 쇼핑 표현</p>
+          <div class="deck-actions">
+            <button class="copy-btn" disabled>
+              <span>🔒</span> 작심삼일한국어 런칭 준비 중
+            </button>
+          </div>
+        </div>
+
+        <div class="deck-card coming-soon">
+          <div class="deck-header">
+            <div class="deck-title-area">
+              <div class="deck-tag-row">
+                <span class="tag tag-level">TOPIK 시험</span>
+                <span class="tag tag-soon">오픈 준비 중</span>
+              </div>
+              <h2 class="deck-name">TOPIK I & II 한국어능력시험 핵심 기출 어휘</h2>
+            </div>
+          </div>
+          <p class="deck-desc">한국어능력시험(TOPIK) 자격증 취득을 위한 등급별 핵심 어휘 총정리</p>
+          <div class="deck-actions">
+            <button class="copy-btn" disabled>
+              <span>🔒</span> 작심삼일한국어 런칭 준비 중
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Toast Notification -->
@@ -546,11 +823,33 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <p>© 2026 GyuC Studio · 작심삼일본어 (OnVocab) 보너스 센터</p>
+      <p>© 2026 GyuC Studio · OnVocab · OnEnglish · OnKorean</p>
     </footer>
   </div>
 
   <script>
+    // Tab Switching Logic
+    function switchAppTab(appKey) {
+      document.querySelectorAll('.main-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      event.currentTarget.classList.add('active');
+      document.getElementById('content-' + appKey).classList.add('active');
+    }
+
+    function switchVocabLang(lang, btn) {
+      document.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (lang === 'ko') {
+        document.getElementById('vocab-ko-decks').style.display = 'flex';
+        document.getElementById('vocab-en-decks').style.display = 'none';
+      } else {
+        document.getElementById('vocab-ko-decks').style.display = 'none';
+        document.getElementById('vocab-en-decks').style.display = 'flex';
+      }
+    }
+
     // Cached texts
     const deckCache = {};
 
@@ -586,7 +885,6 @@
         if (navigator.clipboard && navigator.clipboard.writeText) {
           await navigator.clipboard.writeText(text);
         } else {
-          // Fallback for older browsers
           const ta = document.createElement('textarea');
           ta.value = text;
           ta.style.position = 'fixed';
@@ -614,7 +912,7 @@
       }
     }
 
-    async function togglePreview(boxId, fileUrl) {
+    async function togglePreview(boxId, fileUrl, totalCount) {
       const box = document.getElementById(boxId);
       if (box.classList.contains('open')) {
         box.classList.remove('open');
@@ -627,9 +925,8 @@
       box.textContent = '데이터를 불러오는 중...';
       const text = await getDeckText(fileUrl);
       if (text) {
-        // Show only first 6 non-comment lines
         const lines = text.split('\n').filter(l => l.trim() && !l.startsWith('#')).slice(0, 6);
-        box.textContent = lines.join('\n') + '\n\n... (이하 수천 개 단어 생략)';
+        box.innerHTML = `<div class="preview-notice">💡 샘플 6개 미리보기 (상단 [전체 단어 복사하기] 터치 시 ${totalCount.toLocaleString()}개 전수가 클립보드에 복사됩니다)</div>` + lines.join('\n') + `\n\n... (외 ${ (totalCount - 6).toLocaleString() }개 단어 포함)`;
         box.dataset.loaded = 'true';
       } else {
         box.textContent = '데이터 로딩 실패';
