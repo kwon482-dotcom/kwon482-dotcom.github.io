@@ -122,6 +122,36 @@
       margin: 0 auto;
     }
 
+    .header-counter {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px 6px;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .header-counter:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    .header-counter a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .header-counter img {
+      display: block;
+      height: 20px;
+      border-radius: 4px;
+    }
+
     .card-grid {
       display: flex;
       flex-direction: column;
@@ -409,6 +439,11 @@
       <div class="logo-badge" id="txt-logo-badge">GyuC Mobile Studio</div>
       <h1 id="txt-header-title">GyuC Apps</h1>
       <p id="txt-header-desc">일상을 더 편리하고 단단하게 만드는 실용적인 모바일 라이프 앱</p>
+      <div class="header-counter">
+        <a href="https://hits.sh/kwon482-dotcom.github.io/" target="_blank" rel="noopener noreferrer" title="Today / Total Visitors">
+          <img src="https://hits.sh/kwon482-dotcom.github.io.svg?view=today-total&style=flat-square&label=Visitors&color=0284c7&labelColor=1e293b" alt="Visitors Today and Total" loading="lazy">
+        </a>
+      </div>
     </header>
 
     <main class="card-grid">
